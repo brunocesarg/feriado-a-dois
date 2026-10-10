@@ -71,17 +71,16 @@
    ]
   },
   "maceio": {
-   "nome": "Maceió",
+   "nome": "Maceió e Maragogi",
    "preco": 1779,
    "ref": 1779,
    "min": 1779,
-   "total": 7500,
-   "cabe": false,
+   "total": 8078,
    "promo": false,
    "promo_texto": null,
    "historico": [
     [
-     "2026-10-09",
+     "2026-10-10",
      1779
     ]
    ]
@@ -91,14 +90,88 @@
    "preco": 1442,
    "ref": 1442,
    "min": 1442,
-   "total": 6800,
-   "cabe": false,
+   "total": 7334,
    "promo": false,
    "promo_texto": null,
    "historico": [
     [
-     "2026-10-09",
+     "2026-10-10",
      1442
+    ]
+   ]
+  },
+  "salvador": {
+   "nome": "Salvador",
+   "preco": 1945,
+   "ref": 1945,
+   "min": 1945,
+   "total": 10616,
+   "promo": false,
+   "promo_texto": null,
+   "historico": [
+    [
+     "2026-10-10",
+     1945
+    ]
+   ]
+  },
+  "natal": {
+   "nome": "Natal e Pipa",
+   "preco": 1813,
+   "ref": 1813,
+   "min": 1813,
+   "total": 8898,
+   "promo": false,
+   "promo_texto": null,
+   "historico": [
+    [
+     "2026-10-10",
+     1813
+    ]
+   ]
+  },
+  "arraial": {
+   "nome": "Arraial d'Ajuda (voo p/ Porto Seguro)",
+   "preco": 2038,
+   "ref": 2038,
+   "min": 2038,
+   "total": 8998,
+   "promo": false,
+   "promo_texto": null,
+   "historico": [
+    [
+     "2026-10-10",
+     2038
+    ]
+   ]
+  },
+  "gramado": {
+   "nome": "Gramado (voo p/ Porto Alegre)",
+   "preco": 738,
+   "ref": 738,
+   "min": 738,
+   "total": 7906,
+   "promo": false,
+   "promo_texto": null,
+   "historico": [
+    [
+     "2026-10-10",
+     738
+    ]
+   ]
+  },
+  "foz": {
+   "nome": "Foz do Iguaçu",
+   "preco": 1464,
+   "ref": 1464,
+   "min": 1464,
+   "total": 7433,
+   "promo": false,
+   "promo_texto": null,
+   "historico": [
+    [
+     "2026-10-10",
+     1464
     ]
    ]
   }

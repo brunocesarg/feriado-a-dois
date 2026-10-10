@@ -32,8 +32,14 @@ ROTAS = {
     "bombinhas": {"nome": "Bombinhas (voo p/ Navegantes)", "de": "CGH,GRU,VCP", "para": "NVT", "ref": 866,  "total": 6520},
     "guarapari": {"nome": "Guarapari (voo p/ Vitória)",  "de": "GRU,CGH,VCP", "para": "VIX", "ref": 770,  "total": 6060},
     "porto":     {"nome": "Porto de Galinhas (voo p/ Recife)", "de": "GRU,CGH,VCP", "para": "REC", "ref": 1379, "total": 6960},
-    "maceio":    {"nome": "Maceió",                     "de": "GRU,CGH,VCP", "para": "MCZ", "ref": 1779, "total": 7900, "radar": True},
-    "jpa":       {"nome": "João Pessoa",                "de": "VCP,GRU,CGH", "para": "JPA", "ref": 1442, "total": 7200, "radar": True},
+    # destinos conferidos a cada 3 dias (revezamento) para caber nas 250 consultas grátis por mês
+    "salvador":  {"nome": "Salvador",           "de": "GRU,CGH,VCP", "para": "SSA", "ref": 1945, "total": 10616, "cada": 3},
+    "maceio":    {"nome": "Maceió e Maragogi",  "de": "GRU,CGH,VCP", "para": "MCZ", "ref": 1779, "total": 8078,  "cada": 3},
+    "natal":     {"nome": "Natal e Pipa",       "de": "GRU,CGH,VCP", "para": "NAT", "ref": 1813, "total": 8898,  "cada": 3},
+    "jpa":       {"nome": "João Pessoa",        "de": "VCP,GRU,CGH", "para": "JPA", "ref": 1442, "total": 7334,  "cada": 3},
+    "arraial":   {"nome": "Arraial d'Ajuda (voo p/ Porto Seguro)", "de": "GRU,CGH,VCP", "para": "BPS", "ref": 2038, "total": 8998, "cada": 3},
+    "gramado":   {"nome": "Gramado (voo p/ Porto Alegre)", "de": "CGH,GRU,VCP", "para": "POA", "ref": 738,  "total": 7906,  "cada": 3},
+    "foz":       {"nome": "Foz do Iguaçu",      "de": "GRU,CGH,VCP", "para": "IGU", "ref": 1464, "total": 7433,  "cada": 3},
 }
 QUEDA_PROMO = 0.10      # 10% abaixo da referência
 QUEDA_MINIMA_RS = 40    # novo menor preço só conta se cair pelo menos R$ 40
@@ -136,8 +142,12 @@ def main():
     if not chave:
         print("SERPAPI_KEY não configurada: preços não consultados.")
     else:
-        for rid, rota in ROTAS.items():
+        dia = hoje.timetuple().tm_yday
+        for n, (rid, rota) in enumerate(ROTAS.items()):
             antes = dados["rotas"].get(rid, {})
+            cada = rota.get("cada", 1)
+            if cada > 1 and (dia + n) % cada and antes.get("preco"):
+                continue  # revezamento: esta rota é conferida em outro dia
             try:
                 atual = consultar(chave, rota)
             except Exception as e:  # uma rota com erro não derruba as outras
