@@ -94,24 +94,21 @@ button{font:inherit;color:inherit;cursor:pointer}
 .island.banner .isl-c{opacity:0;pointer-events:none}
 .island.banner .isl-b{opacity:1;pointer-events:auto;cursor:pointer}
 
-/* ---------- modo app: ilha encaixada na Dynamic Island física ---------- */
+/* ---------- modo app: ilha encaixada na Dynamic Island física ----------
+   Medidas (pt): ilha física 125,33 × 36,67; topo 11,33 (iPhone 16, área segura 59) ou 14 (17 Pro Max, área segura 62).
+   Live Activity: compacta 230 / 250 de largura, expandida 371 / 408, cantos de 44.
+   A faixa da barra de status (até 54 pt) não recebe toques no iOS, então o conteúdo tocável fica abaixo dela. */
 .sb-scrim{display:none}
-html.di .sb-scrim{display:block;position:fixed;z-index:55;left:0;right:0;top:0;height:calc(var(--sat) + 14px);pointer-events:none;
-  background:linear-gradient(180deg,#000 0,#000 var(--sat),rgba(0,0,0,0) 100%)}
-html.di .island{top:var(--di-top);--iw:var(--di-w);--ih:var(--di-h);--ir:calc(var(--di-h) / 2);box-shadow:none}
-html.di .island.mid{--iw:calc(var(--di-w) + 76px)}
-html.di .island:not(.mid){--iw:calc(var(--di-w) + 76px)}
-html.di .island.toast,html.di .island.banner{--iw:min(calc(100vw - 16px),372px);--ih:calc(var(--di-h) + 56px);--ir:32px}
-html.di .island.open{--iw:min(calc(100vw - 14px),412px);--ih:calc(var(--di-h) + 226px);--ir:44px}
-html.di .isl-c{padding:0 12px}
-html.di .isl-c .lab{display:none}
-html.di .isl-c .right{margin-left:auto;font-size:13px}
-html.di .isl-c .mini{position:absolute;left:28px}
-html.di .isl-t,html.di .isl-b{padding-top:calc(var(--di-h) + 4px)}
-html.di .isl-x{padding-top:calc(var(--di-h) + 8px)}
-html.di .ix-top span{visibility:hidden}
-html.di .ix-top{position:absolute;top:8px;right:14px}
+html.di .sb-scrim{display:block;position:fixed;z-index:55;left:0;right:0;top:0;height:var(--sat);background:#000;pointer-events:none}
+html.di .island{top:var(--di-top);box-shadow:none;
+  --iw:var(--di-cw);--ih:calc(var(--sat) - var(--di-top) + 28px);--ir:24px}
+html.di .island.toast,html.di .island.banner{--iw:min(var(--di-xw),calc(100vw - 12px));--ih:calc(var(--sat) - var(--di-top) + 64px);--ir:44px}
+html.di .island.open{--iw:min(var(--di-xw),calc(100vw - 12px));--ih:calc(var(--sat) - var(--di-top) + 206px);--ir:44px}
+html.di .isl-c{align-items:flex-end;padding:0 18px 7px}
+html.di .isl-t,html.di .isl-b{padding-top:calc(var(--sat) - var(--di-top) + 2px)}
+html.di .isl-x{padding-top:calc(var(--sat) - var(--di-top) + 4px)}
 html.di .hero-txt{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+html.di .lb-close{top:calc(var(--sat) + 8px)}
 
 /* dica para instalar como app */
 .install{position:fixed;z-index:70;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:500px;margin:0 auto;
@@ -748,12 +745,13 @@ html.di .hero-txt{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
   const DI = !!forced || (isIOS && standalone && sat >= 50);
   if (DI) {
     root.classList.add('di');
+    const big = Math.min(innerWidth, screen.width || innerWidth) > 402;      /* 17 Pro Max e outros de 430/440 pt */
+    const top = sat === 59 ? 11.33 : sat === 62 ? 14 : Math.max(8, sat - 48); /* topo da ilha física por modelo */
     root.style.setProperty('--sat', sat + 'px');
-    root.style.setProperty('--di-top', Math.max(8, sat - 49) + 'px');
-    root.style.setProperty('--di-w', '128px');
-    root.style.setProperty('--di-h', '38px');
+    root.style.setProperty('--di-top', top + 'px');
+    root.style.setProperty('--di-cw', (big ? 250 : 230) + 'px');
+    root.style.setProperty('--di-xw', (big ? 408 : 371) + 'px');
   }
-  const short = n => (Math.floor(n / 10) / 100).toFixed(2).replace('.', ',') + 'k';
 
   /* vibração real: no iOS 18+ um interruptor nativo gera feedback tátil */
   let hapticLabel = null;
@@ -809,13 +807,13 @@ html.di .hero-txt{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
     const m = Math.floor(ms / 6e4); const s = Math.floor((ms - m * 6e4) / 1e3);
     $('#cd-d').textContent = d; $('#cd-h').textContent = String(h).padStart(2, '0');
     $('#cd-m').textContent = String(m).padStart(2, '0'); $('#cd-s').textContent = String(s).padStart(2, '0');
-    if (!current) $('#ic-right').textContent = DI ? d + 'd' : d + ' dias';
+    if (!current) $('#ic-right').textContent = d + ' dias';
   }
   function updateIsland() {
     const d = current && DEST[current];
     $('#ic-dot').style.background = d ? d.color : '#30D158';
     $('#ic-label').textContent = d ? d.name : 'Feriado a dois';
-    if (d) $('#ic-right').textContent = DI ? short(d.total) : brl(d.total); else tick();
+    if (d) $('#ic-right').textContent = brl(d.total); else tick();
     $('#ic-heart').hidden = !(d && favs.includes(current));
     isl.classList.toggle('mid', !!d);
     $('#ix-name').textContent = d ? d.name : 'Escolha um destino';
