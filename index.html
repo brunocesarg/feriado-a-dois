@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Feriado a Dois</title>
+<meta name="description" content="Destinos de praia para descansar no feriado de Carnaval 2027, em até R$ 6 mil para o casal.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Feriado">
+<meta name="theme-color" content="#000000">
+<meta name="format-detection" content="telephone=no">
+<meta name="robots" content="noindex">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<style>
+/* Layout: scrollytelling em coluna de iPhone — capa com parallax, linha do tempo, régua de orçamento,
+   um capítulo por destino (foto fixa que dá zoom e cartões de vidro que sobem por cima), lista e checklist.
+   Ilha flutuante no topo imita a Dynamic Island e acompanha a rolagem. */
+:root{
+  --bg:#F2F2F7; --card:#FFFFFF; --label:#000000; --label2:#6C6C70; --sep:rgba(60,60,67,.18);
+  --fill:rgba(120,120,128,.14); --accent:#0A8EA6; --green:#248A3D; --red:#D70015; --glass:rgba(255,255,255,.80);
+  --s0:#0A8EA6; --s1:#FF9F0A; --s2:#FF6B5A; --s3:#9F7AEA;
+  --f:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+  --fr:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#000000; --card:#1C1C1E; --label:#FFFFFF; --label2:#98989F; --sep:rgba(84,84,88,.6);
+  --fill:rgba(120,120,128,.26); --accent:#40CBE0; --green:#30D158; --red:#FF453A; --glass:rgba(28,28,30,.76);
+  --s0:#40CBE0; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#000000; --card:#1C1C1E; --label:#FFFFFF; --label2:#98989F; --sep:rgba(84,84,88,.6);
+  --fill:rgba(120,120,128,.26); --accent:#40CBE0; --green:#30D158; --red:#FF453A; --glass:rgba(28,28,30,.76);
+  --s0:#40CBE0; color-scheme:dark;}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html.lock,html.lock body{overflow:hidden}
+body{background:var(--bg);color:var(--label);font:17px/1.45 var(--f);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+.app{max-width:520px;margin:0 auto;background:var(--bg);overflow-x:clip}
+h1,h2,h3,p{margin:0}
+h1,h2{text-wrap:balance}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+.num{font-family:var(--fr);font-variant-numeric:tabular-nums}
+.ic{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px}
+.eyebrow{font:600 13px/1 var(--f);letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}
+
+/* ---------- ilha ---------- */
+.island{position:fixed;z-index:60;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translateX(-50%);
+  width:var(--iw,200px);height:var(--ih,36px);border-radius:var(--ir,18px);background:#000;color:#fff;overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.28),0 0 0 .5px rgba(255,255,255,.08);
+  transition:width .55s cubic-bezier(.2,1.2,.35,1),height .55s cubic-bezier(.2,1.2,.35,1),border-radius .45s ease}
+.island.mid{--iw:252px}
+.island.toast{--iw:280px;--ih:44px;--ir:22px}
+.island.open{--iw:min(calc(100vw - 20px),420px);--ih:230px;--ir:38px}
+.island.pop{animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{40%{transform:translateX(-50%) scale(1.07)}}
+.isl-c{position:absolute;inset:0;width:100%;display:flex;align-items:center;gap:8px;padding:0 14px;border:0;background:none;font:600 13px/1 var(--f);transition:opacity .2s}
+.isl-c .dot{width:8px;height:8px;border-radius:50%;background:#30D158;flex:none;box-shadow:0 0 0 3px rgba(48,209,88,.18)}
+.isl-c .lab{flex:1;min-width:0;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.isl-c .right{color:#9BE7F0;font-weight:700}
+.isl-c .mini{width:13px;height:13px;fill:#FF375F;stroke:#FF375F}
+.isl-t{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0 16px;font:600 14px/1.2 var(--f);opacity:0;pointer-events:none;transition:opacity .2s;text-align:center}
+.island.toast .isl-c,.island.open .isl-c{opacity:0;pointer-events:none}
+.island.toast .isl-t{opacity:1}
+.isl-x{position:absolute;inset:0;padding:16px 18px 16px;display:grid;grid-template-rows:auto auto auto auto 1fr;gap:10px;opacity:0;transition:opacity .25s .12s}
+.island.open .isl-x{opacity:1}
+.ix-top{display:flex;justify-content:space-between;align-items:center;font:600 12px/1 var(--f);color:#98989F;text-transform:uppercase;letter-spacing:.05em}
+.ix-top button{width:30px;height:30px;border-radius:50%;border:0;background:#2C2C2E;color:#fff;font-size:18px;line-height:1}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center}
+.cd b{display:block;font:700 28px/1 var(--fr);font-variant-numeric:tabular-nums}
+.cd small{font-size:11px;color:#98989F}
+.ix-dest{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font:600 15px/1.2 var(--f)}
+.ix-dest b{color:#9BE7F0}
+.ix-meter{position:relative;height:6px;border-radius:3px;background:#2C2C2E}
+.ix-meter i{position:absolute;inset:0 auto 0 0;width:0;border-radius:3px;transition:width .5s ease}
+.ix-meter .cap{position:absolute;top:-3px;bottom:-3px;left:93.75%;width:2px;background:#FF453A}
+.ix-act{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-self:end}
+.ix-act button{min-height:40px;border-radius:14px;border:0;background:#2C2C2E;color:#fff;font:600 14px var(--f)}
+.ix-act button[aria-pressed="true"]{background:#FF375F}
+.ix-act button[hidden]+button{grid-column:1/-1}
+.isl-b{position:absolute;inset:0;display:grid;align-content:center;gap:3px;padding:0 20px;opacity:0;pointer-events:none;transition:opacity .2s}
+.isl-b b{font:700 17px/1.1 var(--f);display:flex;align-items:center;gap:8px}
+.isl-b b i{width:9px;height:9px;border-radius:50%;flex:none}
+.isl-b span{font:500 13px/1.2 var(--f);color:#98989F}
+.island.banner .isl-c{opacity:0;pointer-events:none}
+.island.banner .isl-b{opacity:1;pointer-events:auto;cursor:pointer}
+
+/* ---------- modo app: ilha encaixada na Dynamic Island física ---------- */
+.sb-scrim{display:none}
+html.di .sb-scrim{display:block;position:fixed;z-index:55;left:0;right:0;top:0;height:calc(var(--sat) + 14px);pointer-events:none;
+  background:linear-gradient(180deg,#000 0,#000 var(--sat),rgba(0,0,0,0) 100%)}
+html.di .island{top:var(--di-top);--iw:var(--di-w);--ih:var(--di-h);--ir:calc(var(--di-h) / 2);box-shadow:none}
+html.di .island.mid{--iw:calc(var(--di-w) + 76px)}
+html.di .island:not(.mid){--iw:calc(var(--di-w) + 76px)}
+html.di .island.toast,html.di .island.banner{--iw:min(calc(100vw - 16px),372px);--ih:calc(var(--di-h) + 56px);--ir:32px}
+html.di .island.open{--iw:min(calc(100vw - 14px),412px);--ih:calc(var(--di-h) + 226px);--ir:44px}
+html.di .isl-c{padding:0 12px}
+html.di .isl-c .lab{display:none}
+html.di .isl-c .right{margin-left:auto;font-size:13px}
+html.di .isl-c .mini{position:absolute;left:28px}
+html.di .isl-t,html.di .isl-b{padding-top:calc(var(--di-h) + 4px)}
+html.di .isl-x{padding-top:calc(var(--di-h) + 8px)}
+html.di .ix-top span{visibility:hidden}
+html.di .ix-top{position:absolute;top:8px;right:14px}
+html.di .hero-txt{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+
+/* dica para instalar como app */
+.install{position:fixed;z-index:70;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:500px;margin:0 auto;
+  background:var(--glass);-webkit-backdrop-filter:blur(26px) saturate(1.7);backdrop-filter:blur(26px) saturate(1.7);
+  border-radius:22px;padding:14px 46px 14px 16px;box-shadow:0 12px 40px rgba(0,0,0,.25);font-size:14px;display:grid;gap:4px}
+.install b{font:700 15px/1.2 var(--f)}
+.install span{color:var(--label2)}
+.install button{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;border:0;background:var(--fill);font-size:18px;line-height:1}
+.install svg{width:15px;height:15px;vertical-align:-2px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- capa ---------- */
+.hero{position:relative;height:max(560px,92svh);overflow:hidden;color:#fff;background:#0B2B36}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.05);will-change:transform}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 28%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.72) 100%)}
+.hero-txt{position:absolute;left:22px;right:22px;bottom:92px;display:grid;gap:14px;will-change:transform,opacity}
+.hero .eyebrow{color:#fff;opacity:.9}
+.hero h1{font:800 clamp(3.4rem,18vw,4.8rem)/.9 var(--f);letter-spacing:-.045em}
+.hero p{font-size:18px;max-width:30ch;opacity:.95}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font:600 13px/1 var(--f);padding:8px 12px;border-radius:99px;background:rgba(255,255,255,.18);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.cue{position:absolute;left:0;right:0;bottom:26px;display:grid;justify-items:center;gap:2px;font:600 13px var(--f)}
+.cue .ic{width:22px;height:22px;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(5px)}}
+
+/* ---------- seções simples ---------- */
+.sec{padding:60px 20px;display:grid;gap:16px}
+.sec h2{font:800 34px/1.05 var(--f);letter-spacing:-.03em}
+.sec .sub{color:var(--label2);font-size:16px}
+
+.tl{position:relative}
+.tl-line{position:absolute;left:19px;top:22px;bottom:22px;width:3px;border-radius:2px;background:var(--fill)}
+.tl-line i{position:absolute;inset:0;background:var(--accent);border-radius:2px;transform-origin:top}
+.tl ol{list-style:none;margin:0;padding:0;display:grid;gap:24px;position:relative}
+.tl li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
+.tl-dot{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;transition:background .35s,color .35s,transform .35s}
+.tl-dot .ic{width:18px;height:18px}
+.tl.js li:not(.on) .tl-dot{background:var(--card);color:var(--label2);transform:scale(.88)}
+.tl b{font:700 17px/1.2 var(--f)}
+.tl p{color:var(--label2);font-size:15px;margin-top:3px}
+
+.cmp{background:var(--card);border-radius:22px;padding:4px 16px}
+.cmp-row{display:grid;grid-template-columns:minmax(0,108px) minmax(0,1fr) auto;gap:10px;align-items:center;padding:13px 0;color:var(--label);text-decoration:none;border-bottom:.5px solid var(--sep)}
+.cmp-row:last-child{border-bottom:0}
+.cmp-name{font:600 14px/1.2 var(--f);overflow-wrap:anywhere}
+.cmp-bar{position:relative;height:10px;border-radius:5px;background:var(--fill)}
+.cmp-bar i{position:absolute;inset:0 auto 0 0;width:var(--w);border-radius:5px;transform-origin:left}
+.cap{position:absolute;top:-4px;bottom:-4px;width:2px;border-radius:1px;background:var(--red)}
+.cmp-row b{font-size:13px;min-width:62px;text-align:right}
+.over{color:var(--red)}
+.legend-cap{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--label2)}
+.legend-cap i{width:2px;height:14px;background:var(--red)}
+
+/* ---------- capítulos ---------- */
+.intro{padding:30px 20px 34px}
+.chapter{position:relative}
+.ch-bg{position:sticky;top:0;height:100svh;overflow:hidden;background:#0B2B36}
+.ch-bg img{width:100%;height:100%;object-fit:cover;display:block;will-change:transform}
+.ch-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,0) 25%,rgba(0,0,0,.25) 55%,rgba(0,0,0,.7) 100%);opacity:.6}
+.ch-over{position:relative;margin-top:-100svh;padding:56svh 12px 14svh;display:grid;gap:12px}
+.ch-head{color:#fff;padding:0 8px 6px;display:grid;gap:6px;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.ch-head h2{font:800 clamp(2.6rem,12vw,3.4rem)/.95 var(--f);letter-spacing:-.04em}
+.region{font:600 15px var(--f);opacity:.92}
+.line{font-size:18px;max-width:30ch}
+.badge{justify-self:start;font:700 11px/1 var(--f);letter-spacing:.06em;text-transform:uppercase;padding:7px 11px;border-radius:99px;background:var(--hue);color:#fff;text-shadow:none}
+.badge.ghost{background:rgba(255,255,255,.22);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.sheet{background:var(--glass);-webkit-backdrop-filter:blur(26px) saturate(1.7);backdrop-filter:blur(26px) saturate(1.7);
+  border-radius:28px;padding:18px;display:grid;gap:12px;box-shadow:0 12px 40px rgba(0,0,0,.2);min-width:0;will-change:transform,opacity}
+.sheet h3{font:700 20px/1.2 var(--f);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sheet h3 small{font:500 13px var(--f);color:var(--label2)}
+.total-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.lbl{display:block;font-size:13px;color:var(--label2)}
+.total{display:block;font-size:40px;font-weight:800;letter-spacing:-.02em;line-height:1.05}
+.sobra{font:600 14px var(--f);color:var(--green)}
+.sobra.over{color:var(--red)}
+.fav{flex:none;width:52px;height:52px;border-radius:50%;border:0;background:var(--fill);display:grid;place-items:center;transition:transform .2s}
+.fav:active{transform:scale(.88)}
+.fav .heart{width:26px;height:26px;color:var(--label2)}
+.fav[aria-pressed="true"] .heart{fill:#FF375F;stroke:#FF375F;animation:beat .4s ease}
+@keyframes beat{40%{transform:scale(1.3)}}
+.meter{position:relative;height:12px;border-radius:6px;background:var(--fill)}
+.segs{display:flex;height:100%;border-radius:6px;overflow:hidden}
+.segs i,.legend i{display:block;height:100%}
+.s0{background:var(--s0)}.s1{background:var(--s1)}.s2{background:var(--s2)}.s3{background:var(--s3)}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-size:13px}
+.legend span{display:flex;align-items:center;gap:6px;min-width:0}
+.legend i{width:10px;height:10px;border-radius:3px;flex:none}
+.legend b{margin-left:auto;font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{display:inline-flex;align-items:center;gap:6px;font:600 13px/1 var(--f);padding:8px 11px;border-radius:99px;background:var(--fill)}
+.tag.warn{color:var(--red)}
+.hl{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.hl li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:16px}
+.hl li::before{content:"";width:8px;height:8px;margin:8px 0 0 6px;border-radius:50%;background:var(--hue)}
+.gallery{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:2px -18px 0;padding:0 18px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.gallery::-webkit-scrollbar{display:none}
+.g-item{flex:0 0 80%;scroll-snap-align:center;border:0;padding:0;background:none;text-align:left;display:grid;gap:6px}
+.g-item img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:18px;display:block;background:var(--fill)}
+.g-item span{font-size:13px;color:var(--label2);padding-left:4px}
+.hint{font-size:12px;color:var(--label2);text-align:center}
+.rows{list-style:none;margin:0;padding:0}
+.rows li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:12px 0;border-bottom:.5px solid var(--sep);font-size:15px}
+.rows li:last-child{border-bottom:0}
+.route li{grid-template-columns:minmax(0,1fr) auto}
+.rows small{display:block;font-size:12px;color:var(--label2);margin-top:2px}
+.rows .num{font-weight:600;font-size:14px;text-align:right}
+.score{font:700 12px/1 var(--fr);color:#fff;background:var(--hue);padding:5px 7px;border-radius:8px}
+.tip{display:flex;gap:8px;font-size:14px;color:var(--label2);background:var(--fill);border-radius:14px;padding:12px}
+.tip .ic{margin-top:2px;color:var(--accent)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;border-radius:15px;border:0;background:var(--fill);color:var(--accent);font:600 16px var(--f);text-decoration:none}
+.btn.primary{background:var(--accent);color:#fff}
+.btn:disabled{opacity:.45}
+
+/* ---------- lista e checklist ---------- */
+.favlist{list-style:none;margin:0;padding:0;background:var(--card);border-radius:22px;padding:4px 16px}
+.favlist:empty{display:none}
+.favlist li{display:flex;align-items:center;gap:10px;padding:14px 0;border-bottom:.5px solid var(--sep)}
+.favlist li:last-child{border-bottom:0}
+.favlist li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--hue);flex:none}
+.favlist a{flex:1;color:var(--label);text-decoration:none;font-weight:600}
+.favlist b{font-size:15px}
+.empty{background:var(--card);border-radius:22px;padding:18px;color:var(--label2);font-size:15px;display:flex;gap:10px;align-items:center}
+.empty .ic{width:22px;height:22px;color:#FF375F}
+#copy-fallback{width:100%;min-height:110px;border-radius:14px;border:1px solid var(--sep);background:var(--card);color:var(--label);padding:12px;font:15px var(--f)}
+.check{list-style:none;margin:0;padding:4px 16px;background:var(--card);border-radius:22px}
+.check li{border-bottom:.5px solid var(--sep)}
+.check li:last-child{border-bottom:0}
+.check label{display:flex;align-items:center;gap:12px;min-height:54px;font-size:16px;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:26px;height:26px;border-radius:50%;border:2px solid var(--label2);flex:none;display:grid;place-items:center;margin:0;transition:background .2s,border-color .2s}
+.check input:checked{background:var(--accent);border-color:var(--accent)}
+.check input:checked::after{content:"";width:7px;height:12px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:translateY(-1px) rotate(45deg)}
+.check input:checked+span{color:var(--label2);text-decoration:line-through}
+.prog{font:600 14px var(--f);color:var(--label2)}
+
+.foot{padding:30px 20px calc(50px + env(safe-area-inset-bottom,0px));display:grid;gap:12px;font-size:13px;color:var(--label2)}
+.foot summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600;color:var(--accent)}
+.credits{margin:0;padding-left:18px;display:grid;gap:4px}
+
+/* ---------- visualizador de fotos ---------- */
+.lb{position:fixed;inset:0;z-index:80;background:#000;color:#fff;display:grid;grid-template-rows:1fr auto}
+.lb-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior:contain}
+.lb-track::-webkit-scrollbar{display:none}
+.lb-track figure{flex:0 0 100%;margin:0;scroll-snap-align:center;display:grid;place-items:center;padding:56px 0 0}
+.lb-track img{max-width:100%;max-height:100%;object-fit:contain}
+.lb-cap{padding:14px 20px calc(18px + env(safe-area-inset-bottom,0px));display:grid;gap:4px}
+.lb-cap b{font:700 18px var(--f)}
+.lb-cap span{font-size:13px;color:#98989F}
+.lb-close{position:absolute;z-index:2;top:calc(env(safe-area-inset-top,0px) + 12px);right:14px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:26px;line-height:1}
+.lb-nav{position:absolute;z-index:2;top:45%;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:22px}
+.lb-nav.prev{left:10px}.lb-nav.next{right:10px}
+@media (hover:none){.lb-nav{display:none}}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .island,.isl-x,.isl-c{transition:none}
+  .cue .ic,.island.pop{animation:none}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-bus" viewBox="0 0 24 24"><path d="M5 17V6a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v11zM5 11h14M7.5 17v2.5M16.5 17v2.5"/><circle cx="8.5" cy="14" r=".6"/><circle cx="15.5" cy="14" r=".6"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M3 13.5l7-2.5V5.5a2 2 0 0 1 4 0V11l7 2.5v2L14 14v4l2 1.5V21l-4-1-4 1v-1.5l2-1.5v-4l-7 1.5z"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 20c0-9 6-15 15-15 0 9-6 15-15 15zM5 20l8-8"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M15.5 14.6c3 .1 5.5 1.9 5.5 4.9"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5l9.5 17h-19zM12 10v4.5M12 17.5v.3"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-9.6-9C.9 8.3 2.9 4.5 6.6 4.5c2.1 0 3.6 1.2 5.4 3.1 1.8-1.9 3.3-3.1 5.4-3.1 3.7 0 5.7 3.8 4.2 7-2.1 4.4-9.6 9-9.6 9z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8v.4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 11L12 4l8.5 7M5.5 9.5V20h13V9.5"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+</svg>
+
+<div class="sb-scrim" aria-hidden="true"></div>
+<div class="island" id="island">
+  <button class="isl-c" id="isl-c" type="button" aria-expanded="false" aria-controls="isl-x" aria-label="Abrir resumo da viagem">
+    <span class="dot" id="ic-dot"></span><span class="lab" id="ic-label">Feriado a dois</span>
+    <svg class="ic mini" id="ic-heart" hidden aria-hidden="true"><use href="#i-heart"></use></svg>
+    <span class="right num" id="ic-right"></span>
+  </button>
+  <div class="isl-t" aria-live="polite"><span id="it-msg"></span></div>
+  <div class="isl-b" aria-hidden="true"><b><i id="ib-dot"></i><span id="ib-name"></span></b><span id="ib-sub"></span></div>
+  <div class="isl-x" id="isl-x" aria-hidden="true" inert>
+    <div class="ix-top"><span>Saída em</span><button id="ix-close" type="button" aria-label="Fechar resumo">×</button></div>
+    <div class="cd"><div><b id="cd-d">0</b><small>dias</small></div><div><b id="cd-h">00</b><small>horas</small></div><div><b id="cd-m">00</b><small>min</small></div><div><b id="cd-s">00</b><small>seg</small></div></div>
+    <div class="ix-dest"><span id="ix-name">Escolha um destino</span><b class="num" id="ix-total">até R$ 6.000</b></div>
+    <div class="ix-meter"><i id="ix-fill"></i><span class="cap"></span></div>
+    <div class="ix-act"><button id="ix-fav" type="button" aria-pressed="false" hidden>♡ Favoritar</button><button id="ix-next" type="button">Ver a favorita</button></div>
+  </div>
+</div>
+
+<main class="app">
+
+<section class="hero" id="topo" data-plain>
+  <div class="hero-bg"><img src="img/bombinhas.jpg" alt="Litoral de Bombinhas visto do alto" fetchpriority="high" decoding="async"></div>
+  <div class="hero-shade"></div>
+  <div class="hero-txt">
+    <span class="eyebrow">4 a 9 de fevereiro · 2027</span>
+    <h1>Feriado<br>a dois</h1>
+    <p>Praia, descanso e nada de folia. Tudo incluído em até R$ 6 mil para nós dois.</p>
+    <div class="chips"><span>4 noites</span><span>Sem carro</span><span>Saindo de Marília</span></div>
+  </div>
+  <div class="cue" aria-hidden="true">Role para ver<svg class="ic"><use href="#i-chevron"></use></svg></div>
+</section>
+
+<section class="sec" id="plano" data-plain>
+  <span class="eyebrow">O plano</span>
+  <h2>Como vai ser</h2>
+  <div class="tl">
+    <span class="tl-line" aria-hidden="true"><i id="tl-fill"></i></span>
+    <ol>
+      <li><span class="tl-dot"><svg class="ic"><use href="#i-bus"></use></svg></span><div><b>Quinta 4 · 23h30</b><p>Ônibus noturno para São Paulo. Dormimos na estrada e chegamos às 5h30.</p></div></li>
+      <li><span class="tl-dot"><svg class="ic"><use href="#i-plane"></use></svg></span><div><b>Sexta 5 · manhã</b><p>Seguimos para a praia: ônibus para o litoral ou avião, conforme o destino.</p></div></li>
+      <li><span class="tl-dot"><svg class="ic"><use href="#i-sun"></use></svg></span><div><b>Sábado a segunda</b><p>Quatro noites de descanso: praia, cachoeira, comida boa e longe da folia.</p></div></li>
+      <li><span class="tl-dot"><svg class="ic"><use href="#i-home"></use></svg></span><div><b>Terça 9 · noite</b><p>Volta. Ônibus de São Paulo às 23h30 e Marília às 5h30 de quarta.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="orcamento" data-plain>
+  <span class="eyebrow">Orçamento</span>
+  <h2>Até R$ 6 mil, tudo incluído</h2>
+  <p class="sub">Ida e volta de Marília, 4 noites, comida e passeios para nós dois. Toque num destino para ir até ele.</p>
+  <div class="cmp"><a class="cmp-row" href="#caragua"><span class="cmp-name">Caraguatatuba</span><span class="cmp-bar"><i style="--w:68.28%;background:#A2845E" data-grow></i><span class="cap" style="left:93.75%"></span></span><b class="num">R$ 4.370</b></a><a class="cmp-row" href="#costasul"><span class="cmp-name">Costa Sul</span><span class="cmp-bar"><i style="--w:71.72%;background:#FF9500" data-grow></i><span class="cap" style="left:93.75%"></span></span><b class="num">R$ 4.590</b></a><a class="cmp-row" href="#ubatuba"><span class="cmp-name">Ubatuba</span><span class="cmp-bar"><i style="--w:75.00%;background:#5AC8FA" data-grow></i><span class="cap" style="left:93.75%"></span></span><b class="num">R$ 4.800</b></a><a class="cmp-row" href="#ilhabela"><span class="cmp-name">Ilhabela</span><span class="cmp-bar"><i style="--w:77.03%;background:#30B0C7" data-grow></i><span class="cap" style="left:93.75%"></span></span><b class="num">R$ 4.930</b></a><a class="cmp-row" href="#paraty"><span class="cmp-name">Paraty</span><span class="cmp-bar"><i style="--w:77.34%;background:#AF52DE" data-grow></i><span class="cap" style="left:93.75%"></span></span><b class="num">R$ 4.950</b></a><a class="cmp-row" href="#guarapari"><span class="cmp-name">Guarapari</span><span class="cmp-bar"><i style="--w:90.78%;background:#FF2D55" data-grow></i><span class="cap" style="left:93.75%"></span></span><b class="num">R$ 5.810</b></a><a class="cmp-row" href="#floripa"><span class="cmp-name">Florianópolis</span><span class="cmp-bar"><i style="--w:91.88%;background:#007AFF" data-grow></i><span class="cap" style="left:93.75%"></span></span><b class="num">R$ 5.880</b></a><a class="cmp-row" href="#bombinhas"><span class="cmp-name">Bombinhas</span><span class="cmp-bar"><i style="--w:93.28%;background:#34C759" data-grow></i><span class="cap" style="left:93.75%"></span></span><b class="num">R$ 5.970</b></a><a class="cmp-row" href="#porto"><span class="cmp-name">Porto de Galinhas</span><span class="cmp-bar"><i style="--w:97.03%;background:#FF3B30" data-grow></i><span class="cap" style="left:93.75%"></span></span><b class="num over">R$ 6.210</b></a></div>
+  <span class="legend-cap"><i></i>Linha vermelha: o teto de R$ 6 mil</span>
+</section>
+
+<div class="intro" data-plain>
+  <span class="eyebrow">Os destinos</span>
+  <p class="sub" style="margin-top:8px;color:var(--label2)">Role devagar. Toque no coração dos que você mais gostar.</p>
+</div>
+
+
+<section class="chapter" id="ilhabela" data-chapter="ilhabela" style="--hue:#30B0C7">
+  <div class="ch-bg"><img src="img/ilhabela-ducha.jpg" alt="Poço da Ducha, na trilha da Água Branca" decoding="async"><div class="ch-shade"></div></div>
+  <div class="ch-over">
+    <header class="ch-head" data-reveal>
+      <span class="badge">Nossa favorita</span>
+      <h2>Ilhabela</h2>
+      <p class="region">Litoral Norte · SP</p>
+      <p class="line">Mata, cachoeiras e praias calmas. E dá pra fazer tudo sem carro.</p>
+    </header>
+    <div class="sheet" data-reveal>
+      <div class="total-row">
+        <div><span class="lbl">Total para nós dois</span><b class="total num" data-count="4930" aria-label="R$ 4.930">R$ 4.930</b>
+        <span class="sobra">sobram R$ 1.070</span></div>
+        <button class="fav" data-fav="ilhabela" aria-pressed="false" aria-label="Favoritar Ilhabela"><svg class="ic heart" aria-hidden="true"><use href="#i-heart"></use></svg></button>
+      </div>
+      <div class="meter" aria-hidden="true"><div class="segs"><i class="s0" style="width:26.25%"></i><i class="s1" style="width:22.66%"></i><i class="s2" style="width:18.75%"></i><i class="s3" style="width:9.38%"></i></div><span class="cap" style="left:93.75%"></span></div>
+      <div class="legend"><span><i class="s0"></i>Transporte<b class="num">1.680</b></span><span><i class="s1"></i>Hospedagem<b class="num">1.450</b></span><span><i class="s2"></i>Comida<b class="num">1.200</b></span><span><i class="s3"></i>Passeios<b class="num">600</b></span></div>
+      <div class="tags"><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-bus"></use></svg>Ônibus + balsa a pé</span><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-leaf"></use></svg>Calmo</span></div>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>O que fazer</h3>
+      <ul class="hl"><li>Poço da Ducha e cachoeira da Toca</li><li>Praias calmas do sul: Julião, Feiticeira, Curral</li><li>Barco até o Bonete ou Castelhanos</li></ul>
+      <div class="gallery" role="list"><button class="g-item" data-g="ilhabela" data-i="0" aria-label="Ampliar foto: Poço da Ducha, na trilha da Água Branca"><img src="img/ilhabela-ducha.jpg" alt="Poço da Ducha, na trilha da Água Branca" loading="lazy" decoding="async"><span>Poço da Ducha, na trilha da Água Branca</span></button><button class="g-item" data-g="ilhabela" data-i="1" aria-label="Ampliar foto: Ilha das Cabras"><img src="img/ilhabela-cabras.jpg" alt="Ilha das Cabras" loading="lazy" decoding="async"><span>Ilha das Cabras</span></button><button class="g-item" data-g="ilhabela" data-i="2" aria-label="Ampliar foto: Praia do Curral"><img src="img/ilhabela.jpg" alt="Praia do Curral" loading="lazy" decoding="async"><span>Praia do Curral</span></button><button class="g-item" data-g="ilhabela" data-i="3" aria-label="Ampliar foto: Praia do Jabaquara"><img src="img/ilhabela-jabaquara.jpg" alt="Praia do Jabaquara" loading="lazy" decoding="async"><span>Praia do Jabaquara</span></button><button class="g-item" data-g="ilhabela" data-i="4" aria-label="Ampliar foto: Capela no Bonete"><img src="img/ilhabela-bonete.jpg" alt="Capela no Bonete" loading="lazy" decoding="async"><span>Capela no Bonete</span></button><button class="g-item" data-g="ilhabela" data-i="5" aria-label="Ampliar foto: Vila, o centrinho"><img src="img/ilhabela-vila.jpg" alt="Vila, o centrinho" loading="lazy" decoding="async"><span>Vila, o centrinho</span></button><button class="g-item" data-g="ilhabela" data-i="6" aria-label="Ampliar foto: Costão do Parque Estadual"><img src="img/ilhabela-aerea.jpg" alt="Costão do Parque Estadual" loading="lazy" decoding="async"><span>Costão do Parque Estadual</span></button></div>
+      <p class="hint">Toque numa foto para ampliar</p>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Onde ficar <small>4 noites, nós dois</small></h3>
+      <ul class="rows"><li><span>Toca do Lobo</span><b class="score">9,8</b><b class="num">R$ 1.400</b></li><li><span>Suítes Paquetá</span><b class="score">9,6</b><b class="num">R$ 1.448</b></li><li><span>Vila São Pedro</span><b class="score">9,6</b><b class="num">R$ 1.790</b></li></ul>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-br.html?ss=Ilhabela&checkin=2027-02-05&checkout=2027-02-09&group_adults=2&no_rooms=1&group_children=0&selected_currency=BRL&nflt=review_score%3D80%3Bprice%3DBRL-250-550-1&order=bayesian_review_score" target="_blank" rel="noopener">Ver no Booking <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Como chegar</h3>
+      <ul class="rows route"><li><span>Marília → São Paulo<small>qui 23h30</small></span><b class="num">~R$ 250/pessoa</b></li><li><span>São Paulo → São Sebastião<small>~4h</small></span><b class="num">R$ 87–153</b></li><li><span>Balsa a pé até a ilha<small>20 min</small></span><b class="num">grátis</b></li></ul>
+      <p class="tip"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>Levem repelente: o borrachudo de lá é sério.</p>
+    </div>
+  </div>
+</section>
+<section class="chapter" id="floripa" data-chapter="floripa" style="--hue:#007AFF">
+  <div class="ch-bg"><img src="img/floripa.jpg" alt="Ilha do Campeche" loading="lazy" decoding="async"><div class="ch-shade"></div></div>
+  <div class="ch-over">
+    <header class="ch-head" data-reveal>
+      <span class="badge ghost">Opção 2</span>
+      <h2>Florianópolis</h2>
+      <p class="region">Sul da ilha · SC</p>
+      <p class="line">Água cristalina na Ilha do Campeche, a 1h10 de voo de Congonhas.</p>
+    </header>
+    <div class="sheet" data-reveal>
+      <div class="total-row">
+        <div><span class="lbl">Total para nós dois</span><b class="total num" data-count="5880" aria-label="R$ 5.880">R$ 5.880</b>
+        <span class="sobra">sobram R$ 120</span></div>
+        <button class="fav" data-fav="floripa" aria-pressed="false" aria-label="Favoritar Florianópolis"><svg class="ic heart" aria-hidden="true"><use href="#i-heart"></use></svg></button>
+      </div>
+      <div class="meter" aria-hidden="true"><div class="segs"><i class="s0" style="width:47.66%"></i><i class="s1" style="width:20.00%"></i><i class="s2" style="width:17.97%"></i><i class="s3" style="width:6.25%"></i></div><span class="cap" style="left:93.75%"></span></div>
+      <div class="legend"><span><i class="s0"></i>Transporte<b class="num">3.050</b></span><span><i class="s1"></i>Hospedagem<b class="num">1.280</b></span><span><i class="s2"></i>Comida<b class="num">1.150</b></span><span><i class="s3"></i>Passeios<b class="num">400</b></span></div>
+      <div class="tags"><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-plane"></use></svg>Avião R$ 900/pessoa</span><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-leaf"></use></svg>Calmo no sul</span></div>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>O que fazer</h3>
+      <ul class="hl"><li>Barco até a Ilha do Campeche</li><li>Trilha da Lagoinha do Leste</li><li>Fim de tarde na Lagoa da Conceição</li></ul>
+      <div class="gallery" role="list"><button class="g-item" data-g="floripa" data-i="0" aria-label="Ampliar foto: Ilha do Campeche"><img src="img/floripa.jpg" alt="Ilha do Campeche" loading="lazy" decoding="async"><span>Ilha do Campeche</span></button><button class="g-item" data-g="floripa" data-i="1" aria-label="Ampliar foto: Praia do Campeche"><img src="img/floripa-campeche.jpg" alt="Praia do Campeche" loading="lazy" decoding="async"><span>Praia do Campeche</span></button><button class="g-item" data-g="floripa" data-i="2" aria-label="Ampliar foto: Barra da Lagoa"><img src="img/floripa-barra.jpg" alt="Barra da Lagoa" loading="lazy" decoding="async"><span>Barra da Lagoa</span></button><button class="g-item" data-g="floripa" data-i="3" aria-label="Ampliar foto: Lagoa da Conceição"><img src="img/floripa-lagoa.jpg" alt="Lagoa da Conceição" loading="lazy" decoding="async"><span>Lagoa da Conceição</span></button></div>
+      <p class="hint">Toque numa foto para ampliar</p>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Onde ficar <small>4 noites, nós dois</small></h3>
+      <ul class="rows"><li><span>Maison de La Mer · Campeche</span><b class="score">9,6</b><b class="num">R$ 1.280</b></li><li><span>Residencial Verde · Barra da Lagoa</span><b class="score">9,9</b><b class="num">R$ 1.600</b></li><li><span>Residencial Caramujo · Barra da Lagoa</span><b class="score">9,6</b><b class="num">R$ 1.800</b></li></ul>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-br.html?ss=Campeche%2C+Florian%C3%B3polis&checkin=2027-02-05&checkout=2027-02-09&group_adults=2&no_rooms=1&group_children=0&selected_currency=BRL&nflt=review_score%3D80%3Bprice%3DBRL-250-550-1&order=bayesian_review_score" target="_blank" rel="noopener">Ver no Booking <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Como chegar</h3>
+      <ul class="rows route"><li><span>Marília → São Paulo<small>qui 23h30</small></span><b class="num">~R$ 250/pessoa</b></li><li><span>Congonhas → Florianópolis<small>sex 11h40</small></span><b class="num">R$ 900 ida e volta</b></li><li><span>Uber até o Campeche<small>~25 min</small></span><b class="num">~R$ 40</b></li></ul>
+      <p class="tip"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>No limite do orçamento: se for Floripa, comprar o voo logo.</p>
+    </div>
+  </div>
+</section>
+<section class="chapter" id="bombinhas" data-chapter="bombinhas" style="--hue:#34C759">
+  <div class="ch-bg"><img src="img/bombinhas-quatroilhas.jpg" alt="Praia de Quatro Ilhas" loading="lazy" decoding="async"><div class="ch-shade"></div></div>
+  <div class="ch-over">
+    <header class="ch-head" data-reveal>
+      <span class="badge ghost">Opção 3</span>
+      <h2>Bombinhas</h2>
+      <p class="region">Santa Catarina</p>
+      <p class="line">Enseadas de mar verde, snorkel com peixinhos e tudo a pé.</p>
+    </header>
+    <div class="sheet" data-reveal>
+      <div class="total-row">
+        <div><span class="lbl">Total para nós dois</span><b class="total num" data-count="5970" aria-label="R$ 5.970">R$ 5.970</b>
+        <span class="sobra">sobram R$ 30</span></div>
+        <button class="fav" data-fav="bombinhas" aria-pressed="false" aria-label="Favoritar Bombinhas"><svg class="ic heart" aria-hidden="true"><use href="#i-heart"></use></svg></button>
+      </div>
+      <div class="meter" aria-hidden="true"><div class="segs"><i class="s0" style="width:48.28%"></i><i class="s1" style="width:23.12%"></i><i class="s2" style="width:17.19%"></i><i class="s3" style="width:4.69%"></i></div><span class="cap" style="left:93.75%"></span></div>
+      <div class="legend"><span><i class="s0"></i>Transporte<b class="num">3.090</b></span><span><i class="s1"></i>Hospedagem<b class="num">1.480</b></span><span><i class="s2"></i>Comida<b class="num">1.100</b></span><span><i class="s3"></i>Passeios<b class="num">300</b></span></div>
+      <div class="tags"><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-plane"></use></svg>Avião R$ 866/pessoa</span><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-leaf"></use></svg>Calmo</span></div>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>O que fazer</h3>
+      <ul class="hl"><li>Snorkel na Praia da Sepultura</li><li>Quatro Ilhas e Mariscal</li><li>Mirante do Morro do Macaco</li></ul>
+      <div class="gallery" role="list"><button class="g-item" data-g="bombinhas" data-i="0" aria-label="Ampliar foto: Praia de Quatro Ilhas"><img src="img/bombinhas-quatroilhas.jpg" alt="Praia de Quatro Ilhas" loading="lazy" decoding="async"><span>Praia de Quatro Ilhas</span></button><button class="g-item" data-g="bombinhas" data-i="1" aria-label="Ampliar foto: Bombinhas vista do alto"><img src="img/bombinhas.jpg" alt="Bombinhas vista do alto" loading="lazy" decoding="async"><span>Bombinhas vista do alto</span></button><button class="g-item" data-g="bombinhas" data-i="2" aria-label="Ampliar foto: Praia de Bombas"><img src="img/bombinhas-bombas.jpg" alt="Praia de Bombas" loading="lazy" decoding="async"><span>Praia de Bombas</span></button></div>
+      <p class="hint">Toque numa foto para ampliar</p>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Onde ficar <small>4 noites, nós dois</small></h3>
+      <ul class="rows"><li><span>Villa Porto do Sol</span><b class="score">9,5</b><b class="num">R$ 1.480</b></li><li><span>Chalé Cabana da Mata</span><b class="score">9,7</b><b class="num">R$ 1.410</b></li><li><span>Hospedaria Canto do Morro</span><b class="score">9,6</b><b class="num">R$ 1.600</b></li></ul>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-br.html?ss=Bombinhas&checkin=2027-02-05&checkout=2027-02-09&group_adults=2&no_rooms=1&group_children=0&selected_currency=BRL&nflt=review_score%3D80%3Bprice%3DBRL-250-550-1&order=bayesian_review_score" target="_blank" rel="noopener">Ver no Booking <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Como chegar</h3>
+      <ul class="rows route"><li><span>Marília → São Paulo<small>qui 23h30</small></span><b class="num">~R$ 250/pessoa</b></li><li><span>Congonhas → Navegantes<small>sex 15h20</small></span><b class="num">R$ 866 ida e volta</b></li><li><span>Uber até Bombinhas<small>~1h</small></span><b class="num">~R$ 130</b></li></ul>
+      <p class="tip"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>De ônibus direto sai uns R$ 4.700, mas são cerca de 19h30 de estrada.</p>
+    </div>
+  </div>
+</section>
+<section class="chapter" id="ubatuba" data-chapter="ubatuba" style="--hue:#5AC8FA">
+  <div class="ch-bg"><img src="img/ubatuba-prumirim3.jpg" alt="Praia do Prumirim" loading="lazy" decoding="async"><div class="ch-shade"></div></div>
+  <div class="ch-over">
+    <header class="ch-head" data-reveal>
+      <span class="badge ghost">Opção 4</span>
+      <h2>Ubatuba</h2>
+      <p class="region">Praias do norte · SP</p>
+      <p class="line">Praias de natureza, com rio e cachoeira, longe do agito do centro.</p>
+    </header>
+    <div class="sheet" data-reveal>
+      <div class="total-row">
+        <div><span class="lbl">Total para nós dois</span><b class="total num" data-count="4800" aria-label="R$ 4.800">R$ 4.800</b>
+        <span class="sobra">sobram R$ 1.200</span></div>
+        <button class="fav" data-fav="ubatuba" aria-pressed="false" aria-label="Favoritar Ubatuba"><svg class="ic heart" aria-hidden="true"><use href="#i-heart"></use></svg></button>
+      </div>
+      <div class="meter" aria-hidden="true"><div class="segs"><i class="s0" style="width:28.12%"></i><i class="s1" style="width:22.66%"></i><i class="s2" style="width:17.19%"></i><i class="s3" style="width:7.03%"></i></div><span class="cap" style="left:93.75%"></span></div>
+      <div class="legend"><span><i class="s0"></i>Transporte<b class="num">1.800</b></span><span><i class="s1"></i>Hospedagem<b class="num">1.450</b></span><span><i class="s2"></i>Comida<b class="num">1.100</b></span><span><i class="s3"></i>Passeios<b class="num">450</b></span></div>
+      <div class="tags"><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-bus"></use></svg>Ônibus</span><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-leaf"></use></svg>Calmo no norte</span></div>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>O que fazer</h3>
+      <ul class="hl"><li>Cachoeira do Prumirim, pertinho da praia</li><li>Escuna até a Ilha Anchieta</li><li>Itamambuca e Félix</li></ul>
+      <div class="gallery" role="list"><button class="g-item" data-g="ubatuba" data-i="0" aria-label="Ampliar foto: Praia do Prumirim"><img src="img/ubatuba-prumirim3.jpg" alt="Praia do Prumirim" loading="lazy" decoding="async"><span>Praia do Prumirim</span></button><button class="g-item" data-g="ubatuba" data-i="1" aria-label="Ampliar foto: Igreja Matriz, no centro"><img src="img/ubatuba-igreja.jpg" alt="Igreja Matriz, no centro" loading="lazy" decoding="async"><span>Igreja Matriz, no centro</span></button><button class="g-item" data-g="ubatuba" data-i="2" aria-label="Ampliar foto: Itamambuca"><img src="img/ubatuba-itamambuca.jpg" alt="Itamambuca" loading="lazy" decoding="async"><span>Itamambuca</span></button><button class="g-item" data-g="ubatuba" data-i="3" aria-label="Ampliar foto: Ilha do Prumirim"><img src="img/ubatuba-prumirim2.jpg" alt="Ilha do Prumirim" loading="lazy" decoding="async"><span>Ilha do Prumirim</span></button><button class="g-item" data-g="ubatuba" data-i="4" aria-label="Ampliar foto: Mata Atlântica no Prumirim"><img src="img/ubatuba.jpg" alt="Mata Atlântica no Prumirim" loading="lazy" decoding="async"><span>Mata Atlântica no Prumirim</span></button></div>
+      <p class="hint">Toque numa foto para ampliar</p>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Onde ficar <small>4 noites, nós dois</small></h3>
+      <ul class="rows"><li><span>La Casa Rozada · Prumirim</span><b class="score">9,8</b><b class="num">R$ 1.480</b></li><li><span>Apartamentos Kairos</span><b class="score">9,7</b><b class="num">R$ 1.120</b></li><li><span>Suítes Coqueiros · Itamambuca</span><b class="score">9,6</b><b class="num">R$ 1.950</b></li></ul>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-br.html?ss=Ubatuba&checkin=2027-02-05&checkout=2027-02-09&group_adults=2&no_rooms=1&group_children=0&selected_currency=BRL&nflt=review_score%3D80%3Bprice%3DBRL-250-550-1&order=bayesian_review_score" target="_blank" rel="noopener">Ver no Booking <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Como chegar</h3>
+      <ul class="rows route"><li><span>Marília → São Paulo<small>qui 23h30</small></span><b class="num">~R$ 250/pessoa</b></li><li><span>São Paulo → Ubatuba<small>~5h</small></span><b class="num">R$ 127–150</b></li><li><span>Circular até o norte<small>~30 min</small></span><b class="num">~R$ 6</b></li></ul>
+      <p class="tip"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>Com carro alugado fica uns R$ 5.300 e as praias afastadas ficam fáceis.</p>
+    </div>
+  </div>
+</section>
+<section class="chapter" id="costasul" data-chapter="costasul" style="--hue:#FF9500">
+  <div class="ch-bg"><img src="img/costasul.jpg" alt="Juquehy" loading="lazy" decoding="async"><div class="ch-shade"></div></div>
+  <div class="ch-over">
+    <header class="ch-head" data-reveal>
+      <span class="badge ghost">Opção 5</span>
+      <h2>Costa Sul</h2>
+      <p class="region">Juquehy, Camburi e Calhetas · SP</p>
+      <p class="line">Praias de areia clara com rio e mata, uma do lado da outra.</p>
+    </header>
+    <div class="sheet" data-reveal>
+      <div class="total-row">
+        <div><span class="lbl">Total para nós dois</span><b class="total num" data-count="4590" aria-label="R$ 4.590">R$ 4.590</b>
+        <span class="sobra">sobram R$ 1.410</span></div>
+        <button class="fav" data-fav="costasul" aria-pressed="false" aria-label="Favoritar Costa Sul"><svg class="ic heart" aria-hidden="true"><use href="#i-heart"></use></svg></button>
+      </div>
+      <div class="meter" aria-hidden="true"><div class="segs"><i class="s0" style="width:26.88%"></i><i class="s1" style="width:21.41%"></i><i class="s2" style="width:18.75%"></i><i class="s3" style="width:4.69%"></i></div><span class="cap" style="left:93.75%"></span></div>
+      <div class="legend"><span><i class="s0"></i>Transporte<b class="num">1.720</b></span><span><i class="s1"></i>Hospedagem<b class="num">1.370</b></span><span><i class="s2"></i>Comida<b class="num">1.200</b></span><span><i class="s3"></i>Passeios<b class="num">300</b></span></div>
+      <div class="tags"><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-bus"></use></svg>Ônibus</span><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-leaf"></use></svg>Calmo</span></div>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>O que fazer</h3>
+      <ul class="hl"><li>Praia escondida de Calhetas</li><li>Rio encontrando o mar em Camburi</li><li>Pôr do sol no Juquehy</li></ul>
+      <div class="gallery" role="list"><button class="g-item" data-g="costasul" data-i="0" aria-label="Ampliar foto: Juquehy"><img src="img/costasul.jpg" alt="Juquehy" loading="lazy" decoding="async"><span>Juquehy</span></button><button class="g-item" data-g="costasul" data-i="1" aria-label="Ampliar foto: Camburi vista do alto"><img src="img/costasul-camburi.jpg" alt="Camburi vista do alto" loading="lazy" decoding="async"><span>Camburi vista do alto</span></button><button class="g-item" data-g="costasul" data-i="2" aria-label="Ampliar foto: Rio Camburi"><img src="img/costasul-rio.jpg" alt="Rio Camburi" loading="lazy" decoding="async"><span>Rio Camburi</span></button></div>
+      <p class="hint">Toque numa foto para ampliar</p>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Onde ficar <small>4 noites, nós dois</small></h3>
+      <ul class="rows"><li><span>Calhetas Suíte</span><b class="score">9,9</b><b class="num">R$ 1.200</b></li><li><span>Villaggio di Assisi</span><b class="score">9,6</b><b class="num">R$ 1.370</b></li><li><span>Casinha Mar e Sol · Boiçucanga</span><b class="score">10</b><b class="num">R$ 1.640</b></li></ul>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-br.html?ss=S%C3%A3o+Sebasti%C3%A3o&checkin=2027-02-05&checkout=2027-02-09&group_adults=2&no_rooms=1&group_children=0&selected_currency=BRL&nflt=review_score%3D80%3Bprice%3DBRL-250-550-1&order=bayesian_review_score" target="_blank" rel="noopener">Ver no Booking <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Como chegar</h3>
+      <ul class="rows route"><li><span>Marília → São Paulo<small>qui 23h30</small></span><b class="num">~R$ 250/pessoa</b></li><li><span>São Paulo → Costa Sul<small>~4h</small></span><b class="num">R$ 87–153</b></li></ul>
+      <p class="tip"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>Fujam de Maresias: é a praia da balada.</p>
+    </div>
+  </div>
+</section>
+<section class="chapter" id="paraty" data-chapter="paraty" style="--hue:#AF52DE">
+  <div class="ch-bg"><img src="img/paraty-igreja.jpg" alt="Igreja de Santa Rita, vista da baía" loading="lazy" decoding="async"><div class="ch-shade"></div></div>
+  <div class="ch-over">
+    <header class="ch-head" data-reveal>
+      <span class="badge ghost">Opção 6</span>
+      <h2>Paraty</h2>
+      <p class="region">Costa Verde · RJ</p>
+      <p class="line">Centro histórico, barco pelas ilhas e Trindade a 30 minutos.</p>
+    </header>
+    <div class="sheet" data-reveal>
+      <div class="total-row">
+        <div><span class="lbl">Total para nós dois</span><b class="total num" data-count="4950" aria-label="R$ 4.950">R$ 4.950</b>
+        <span class="sobra">sobram R$ 1.050</span></div>
+        <button class="fav" data-fav="paraty" aria-pressed="false" aria-label="Favoritar Paraty"><svg class="ic heart" aria-hidden="true"><use href="#i-heart"></use></svg></button>
+      </div>
+      <div class="meter" aria-hidden="true"><div class="segs"><i class="s0" style="width:28.12%"></i><i class="s1" style="width:22.66%"></i><i class="s2" style="width:18.75%"></i><i class="s3" style="width:7.81%"></i></div><span class="cap" style="left:93.75%"></span></div>
+      <div class="legend"><span><i class="s0"></i>Transporte<b class="num">1.800</b></span><span><i class="s1"></i>Hospedagem<b class="num">1.450</b></span><span><i class="s2"></i>Comida<b class="num">1.200</b></span><span><i class="s3"></i>Passeios<b class="num">500</b></span></div>
+      <div class="tags"><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-bus"></use></svg>Ônibus</span><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-leaf"></use></svg>Calmo fora do centro</span></div>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>O que fazer</h3>
+      <ul class="hl"><li>Escuna pelas ilhas da baía</li><li>Piscina natural do Cachadaço, em Trindade</li><li>Noite no centro histórico</li></ul>
+      <div class="gallery" role="list"><button class="g-item" data-g="paraty" data-i="0" aria-label="Ampliar foto: Igreja de Santa Rita, vista da baía"><img src="img/paraty-igreja.jpg" alt="Igreja de Santa Rita, vista da baía" loading="lazy" decoding="async"><span>Igreja de Santa Rita, vista da baía</span></button><button class="g-item" data-g="paraty" data-i="1" aria-label="Ampliar foto: Casarões do centro histórico"><img src="img/paraty.jpg" alt="Casarões do centro histórico" loading="lazy" decoding="async"><span>Casarões do centro histórico</span></button><button class="g-item" data-g="paraty" data-i="2" aria-label="Ampliar foto: Trindade"><img src="img/paraty-trindade.jpg" alt="Trindade" loading="lazy" decoding="async"><span>Trindade</span></button><button class="g-item" data-g="paraty" data-i="3" aria-label="Ampliar foto: Barcos no cais"><img src="img/paraty-barcos.jpg" alt="Barcos no cais" loading="lazy" decoding="async"><span>Barcos no cais</span></button></div>
+      <p class="hint">Toque numa foto para ampliar</p>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Onde ficar <small>4 noites, nós dois</small></h3>
+      <ul class="rows"><li><span>Chalé Encanto Paraty</span><b class="score">9,8</b><b class="num">R$ 1.200</b></li><li><span>Loft Marrapaiá · 1 km do centro</span><b class="score">9,2</b><b class="num">R$ 1.456</b></li><li><span>Casa Beira Mar</span><b class="score">9,7</b><b class="num">R$ 1.860</b></li></ul>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-br.html?ss=Paraty&checkin=2027-02-05&checkout=2027-02-09&group_adults=2&no_rooms=1&group_children=0&selected_currency=BRL&nflt=review_score%3D80%3Bprice%3DBRL-250-550-1&order=bayesian_review_score" target="_blank" rel="noopener">Ver no Booking <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Como chegar</h3>
+      <ul class="rows route"><li><span>Marília → São Paulo<small>qui 23h30</small></span><b class="num">~R$ 250/pessoa</b></li><li><span>São Paulo → Paraty<small>~6h40</small></span><b class="num">desde R$ 109</b></li></ul>
+      <p class="tip"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>É a viagem por terra mais longa: cerca de 14h de porta a porta.</p>
+    </div>
+  </div>
+</section>
+<section class="chapter" id="caragua" data-chapter="caragua" style="--hue:#A2845E">
+  <div class="ch-bg"><img src="img/caragua.jpg" alt="Praia do Capricórnio" loading="lazy" decoding="async"><div class="ch-shade"></div></div>
+  <div class="ch-over">
+    <header class="ch-head" data-reveal>
+      <span class="badge ghost">Opção 7</span>
+      <h2>Caraguatatuba</h2>
+      <p class="region">Litoral Norte · SP</p>
+      <p class="line">A hospedagem mais barata do litoral, a 20 minutos da balsa para Ilhabela.</p>
+    </header>
+    <div class="sheet" data-reveal>
+      <div class="total-row">
+        <div><span class="lbl">Total para nós dois</span><b class="total num" data-count="4370" aria-label="R$ 4.370">R$ 4.370</b>
+        <span class="sobra">sobram R$ 1.630</span></div>
+        <button class="fav" data-fav="caragua" aria-pressed="false" aria-label="Favoritar Caraguatatuba"><svg class="ic heart" aria-hidden="true"><use href="#i-heart"></use></svg></button>
+      </div>
+      <div class="meter" aria-hidden="true"><div class="segs"><i class="s0" style="width:26.88%"></i><i class="s1" style="width:18.75%"></i><i class="s2" style="width:17.19%"></i><i class="s3" style="width:5.47%"></i></div><span class="cap" style="left:93.75%"></span></div>
+      <div class="legend"><span><i class="s0"></i>Transporte<b class="num">1.720</b></span><span><i class="s1"></i>Hospedagem<b class="num">1.200</b></span><span><i class="s2"></i>Comida<b class="num">1.100</b></span><span><i class="s3"></i>Passeios<b class="num">350</b></span></div>
+      <div class="tags"><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-bus"></use></svg>Ônibus</span><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-people"></use></svg>Movimentado</span></div>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>O que fazer</h3>
+      <ul class="hl"><li>Voo livre e mirante no Morro Santo Antônio</li><li>Bate-volta a Ilhabela de balsa</li><li>Praia da Tabatinga</li></ul>
+      <div class="gallery" role="list"><button class="g-item" data-g="caragua" data-i="0" aria-label="Ampliar foto: Praia do Capricórnio"><img src="img/caragua.jpg" alt="Praia do Capricórnio" loading="lazy" decoding="async"><span>Praia do Capricórnio</span></button><button class="g-item" data-g="caragua" data-i="1" aria-label="Ampliar foto: Morro Santo Antônio"><img src="img/caragua-morro.jpg" alt="Morro Santo Antônio" loading="lazy" decoding="async"><span>Morro Santo Antônio</span></button></div>
+      <p class="hint">Toque numa foto para ampliar</p>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Onde ficar <small>4 noites, nós dois</small></h3>
+      <ul class="rows"><li><span>Aloogar Caragua Beach</span><b class="score">9,9</b><b class="num">R$ 1.120</b></li><li><span>Suíte em Caraguá</span><b class="score">9,6</b><b class="num">R$ 1.000</b></li><li><span>Alouan Pousada</span><b class="score">9,6</b><b class="num">R$ 1.588</b></li></ul>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-br.html?ss=Caraguatatuba&checkin=2027-02-05&checkout=2027-02-09&group_adults=2&no_rooms=1&group_children=0&selected_currency=BRL&nflt=review_score%3D80%3Bprice%3DBRL-250-550-1&order=bayesian_review_score" target="_blank" rel="noopener">Ver no Booking <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Como chegar</h3>
+      <ul class="rows route"><li><span>Marília → São Paulo<small>qui 23h30</small></span><b class="num">~R$ 250/pessoa</b></li><li><span>São Paulo → Caraguatatuba<small>~3h40</small></span><b class="num">R$ 109–144</b></li></ul>
+      <p class="tip"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>As praias do centro são menos bonitas. Vale se a ideia for economizar.</p>
+    </div>
+  </div>
+</section>
+<section class="chapter" id="guarapari" data-chapter="guarapari" style="--hue:#FF2D55">
+  <div class="ch-bg"><img src="img/guarapari-meaipe.jpg" alt="Praia de Meaípe" loading="lazy" decoding="async"><div class="ch-shade"></div></div>
+  <div class="ch-over">
+    <header class="ch-head" data-reveal>
+      <span class="badge ghost">Opção 8</span>
+      <h2>Guarapari</h2>
+      <p class="region">Espírito Santo</p>
+      <p class="line">Enseadas bonitas e moqueca capixaba. O porém: lota no feriado.</p>
+    </header>
+    <div class="sheet" data-reveal>
+      <div class="total-row">
+        <div><span class="lbl">Total para nós dois</span><b class="total num" data-count="5810" aria-label="R$ 5.810">R$ 5.810</b>
+        <span class="sobra">sobram R$ 190</span></div>
+        <button class="fav" data-fav="guarapari" aria-pressed="false" aria-label="Favoritar Guarapari"><svg class="ic heart" aria-hidden="true"><use href="#i-heart"></use></svg></button>
+      </div>
+      <div class="meter" aria-hidden="true"><div class="segs"><i class="s0" style="width:46.25%"></i><i class="s1" style="width:22.66%"></i><i class="s2" style="width:17.19%"></i><i class="s3" style="width:4.69%"></i></div><span class="cap" style="left:93.75%"></span></div>
+      <div class="legend"><span><i class="s0"></i>Transporte<b class="num">2.960</b></span><span><i class="s1"></i>Hospedagem<b class="num">1.450</b></span><span><i class="s2"></i>Comida<b class="num">1.100</b></span><span><i class="s3"></i>Passeios<b class="num">300</b></span></div>
+      <div class="tags"><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-plane"></use></svg>Avião R$ 770/pessoa</span><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-people"></use></svg>Lota no feriado</span></div>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>O que fazer</h3>
+      <ul class="hl"><li>Meaípe e Enseada Azul</li><li>Parque Paulo César Vinha, em Setiba</li><li>Moqueca capixaba</li></ul>
+      <div class="gallery" role="list"><button class="g-item" data-g="guarapari" data-i="0" aria-label="Ampliar foto: Praia de Meaípe"><img src="img/guarapari-meaipe.jpg" alt="Praia de Meaípe" loading="lazy" decoding="async"><span>Praia de Meaípe</span></button><button class="g-item" data-g="guarapari" data-i="1" aria-label="Ampliar foto: Praia do Morro no verão"><img src="img/guarapari-morro.jpg" alt="Praia do Morro no verão" loading="lazy" decoding="async"><span>Praia do Morro no verão</span></button></div>
+      <p class="hint">Toque numa foto para ampliar</p>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Onde ficar <small>4 noites, nós dois</small></h3>
+      <ul class="rows"><li><span>Pousada Nosso Cantinho</span><b class="score">9,4</b><b class="num">R$ 1.440</b></li><li><span>Ktinet Praia do Morro</span><b class="score">9,3</b><b class="num">R$ 1.463</b></li></ul>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-br.html?ss=Guarapari&checkin=2027-02-05&checkout=2027-02-09&group_adults=2&no_rooms=1&group_children=0&selected_currency=BRL&nflt=review_score%3D80%3Bprice%3DBRL-250-550-1&order=bayesian_review_score" target="_blank" rel="noopener">Ver no Booking <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Como chegar</h3>
+      <ul class="rows route"><li><span>Marília → São Paulo<small>qui 23h30</small></span><b class="num">~R$ 250/pessoa</b></li><li><span>Guarulhos → Vitória<small>sex 10h</small></span><b class="num">R$ 770 ida e volta</b></li><li><span>Uber até Guarapari<small>~1h</small></span><b class="num">~R$ 110</b></li></ul>
+      <p class="tip"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>Menos descanso que as outras opções, por causa da lotação.</p>
+    </div>
+  </div>
+</section>
+<section class="chapter" id="porto" data-chapter="porto" style="--hue:#FF3B30">
+  <div class="ch-bg"><img src="img/porto.jpg" alt="Jangada nas piscinas naturais" loading="lazy" decoding="async"><div class="ch-shade"></div></div>
+  <div class="ch-over">
+    <header class="ch-head" data-reveal>
+      <span class="badge ghost">Opção 9</span>
+      <h2>Porto de Galinhas</h2>
+      <p class="region">Pernambuco</p>
+      <p class="line">As piscinas naturais mais famosas do país. Só cabe se a passagem baixar.</p>
+    </header>
+    <div class="sheet" data-reveal>
+      <div class="total-row">
+        <div><span class="lbl">Total para nós dois</span><b class="total num" data-count="6210" aria-label="R$ 6.210">R$ 6.210</b>
+        <span class="sobra over">passa R$ 210</span></div>
+        <button class="fav" data-fav="porto" aria-pressed="false" aria-label="Favoritar Porto de Galinhas"><svg class="ic heart" aria-hidden="true"><use href="#i-heart"></use></svg></button>
+      </div>
+      <div class="meter" aria-hidden="true"><div class="segs"><i class="s0" style="width:64.69%"></i><i class="s1" style="width:16.41%"></i><i class="s2" style="width:14.06%"></i><i class="s3" style="width:1.88%"></i></div><span class="cap" style="left:93.75%"></span></div>
+      <div class="legend"><span><i class="s0"></i>Transporte<b class="num">4.140</b></span><span><i class="s1"></i>Hospedagem<b class="num">1.050</b></span><span><i class="s2"></i>Comida<b class="num">900</b></span><span><i class="s3"></i>Passeios<b class="num">120</b></span></div>
+      <div class="tags"><span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-plane"></use></svg>Avião R$ 1.379/pessoa</span><span class="tag warn"><svg class="ic" aria-hidden="true"><use href="#i-alert"></use></svg>Passa do teto</span></div>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>O que fazer</h3>
+      <ul class="hl"><li>Jangada até as piscinas naturais</li><li>Pôr do sol no Pontal de Maracaípe</li><li>Vila charmosa à noite</li></ul>
+      <div class="gallery" role="list"><button class="g-item" data-g="porto" data-i="0" aria-label="Ampliar foto: Jangada nas piscinas naturais"><img src="img/porto.jpg" alt="Jangada nas piscinas naturais" loading="lazy" decoding="async"><span>Jangada nas piscinas naturais</span></button><button class="g-item" data-g="porto" data-i="1" aria-label="Ampliar foto: A vila"><img src="img/porto-vila.jpg" alt="A vila" loading="lazy" decoding="async"><span>A vila</span></button><button class="g-item" data-g="porto" data-i="2" aria-label="Ampliar foto: Pontal de Maracaípe"><img src="img/porto-maracaipe.jpg" alt="Pontal de Maracaípe" loading="lazy" decoding="async"><span>Pontal de Maracaípe</span></button></div>
+      <p class="hint">Toque numa foto para ampliar</p>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Onde ficar <small>4 noites, nós dois</small></h3>
+      <ul class="rows"><li><span>Aconchego em Porto de Galinhas</span><b class="score">9,8</b><b class="num">R$ 1.010</b></li><li><span>Suítes Cavalo Marinho</span><b class="score">9,1</b><b class="num">R$ 1.071</b></li></ul>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-br.html?ss=Porto+de+Galinhas&checkin=2027-02-05&checkout=2027-02-09&group_adults=2&no_rooms=1&group_children=0&selected_currency=BRL&nflt=review_score%3D80%3Bprice%3DBRL-250-550-1&order=bayesian_review_score" target="_blank" rel="noopener">Ver no Booking <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+    </div>
+    <div class="sheet" data-reveal>
+      <h3>Como chegar</h3>
+      <ul class="rows route"><li><span>Marília → São Paulo<small>qui 23h30</small></span><b class="num">~R$ 250/pessoa</b></li><li><span>Guarulhos → Recife<small>sex 14h10</small></span><b class="num">R$ 1.379 ida e volta</b></li><li><span>Ônibus até a vila<small>~1h</small></span><b class="num">R$ 15</b></li></ul>
+      <p class="tip"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>Fica uns R$ 210 acima do teto.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="lista" data-plain>
+  <span class="eyebrow">Nossa lista</span>
+  <h2>Favoritos</h2>
+  <p class="empty" id="fav-empty"><svg class="ic"><use href="#i-heart"></use></svg>Toque no coração dos destinos que você mais gostou. Eles aparecem aqui.</p>
+  <ol class="favlist" id="fav-list"></ol>
+  <button class="btn primary" id="copy" type="button" disabled>Copiar para mandar no WhatsApp</button>
+  <textarea id="copy-fallback" hidden readonly aria-label="Texto para copiar"></textarea>
+</section>
+
+<section class="sec" id="fechar" data-plain>
+  <span class="eyebrow">Para fechar</span>
+  <h2>O que falta</h2>
+  <span class="prog" id="check-n">0 de 5</span>
+  <ul class="check">
+    <li><label><input type="checkbox" id="ck-destino"><span>Escolher o destino</span></label></li>
+    <li><label><input type="checkbox" id="ck-hotel"><span>Reservar a hospedagem com cancelamento grátis</span></label></li>
+    <li><label><input type="checkbox" id="ck-voo"><span>Se for de avião, comprar o voo logo</span></label></li>
+    <li><label><input type="checkbox" id="ck-onibus"><span>Comprar os ônibus de quinta e de terça</span></label></li>
+    <li><label><input type="checkbox" id="ck-folga"><span>Folga na sexta, 5 de fevereiro</span></label></li>
+  </ul>
+</section>
+
+<footer class="foot" data-plain>
+  <p>Preços pesquisados em 09/out/2026 no Google Voos, no Booking e no BusOn. Podem mudar até a compra.</p>
+  <details><summary>Créditos das fotos (Wikimedia Commons)</summary><ul class="credits"><li><a href="https://commons.wikimedia.org/wiki/File:Renato_Soares_Praia_da_Sepultura_Bombinhas_SC_(41539996032).jpg" target="_blank" rel="noopener">Capa: Bombinhas</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:MaristelaColucci_PocodaDucha_TrilhadaAguaBranca_Ilhabela_SP_(39243992660).jpg" target="_blank" rel="noopener">Poço da Ducha, na trilha da Água Branca</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:MaristelaColucci_IlhaDasCabras_Ilhabela_SP_(40344171464).jpg" target="_blank" rel="noopener">Ilha das Cabras</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Praia-do-curral-ilhabela-sp.jpg" target="_blank" rel="noopener">Praia do Curral</a> · Lucailhabela · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:MaristelaColucci_PraiadoJabaquara_Ilhabela_SP_(27181353098).jpg" target="_blank" rel="noopener">Praia do Jabaquara</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:MaristelaColucci_PraiadoBonete_Ilhabela_SP_(26181933167).jpg" target="_blank" rel="noopener">Capela no Bonete</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Ilhabela_09.JPG" target="_blank" rel="noopener">Vila, o centrinho</a> · RODRIGO LEHSTEN · CC BY-SA 3.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Parque_Estadual_de_Ilhabela_Jo%C3%A3o_Paulo_Marques_DAndretta_(1).jpg" target="_blank" rel="noopener">Costão do Parque Estadual</a> · João D&#x27;Andretta · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Ilha_do_Campeche_e_sua_natureza_exuberante.jpg" target="_blank" rel="noopener">Ilha do Campeche</a> · Luluhgomes · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:DanielVianna_Praia_do_Campeche_Florianopolis_SC_(41528477152).jpg" target="_blank" rel="noopener">Praia do Campeche</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Barra_da_Lagoa_from_a_trail_nearby_(cropped).jpg" target="_blank" rel="noopener">Barra da Lagoa</a> · Mx. Granger · CC0</li><li><a href="https://commons.wikimedia.org/wiki/File:ViewLagoadaConceicao-feb2015.JPG" target="_blank" rel="noopener">Lagoa da Conceição</a> · Ezarate · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Quatroilhas4.jpg" target="_blank" rel="noopener">Praia de Quatro Ilhas</a> · Gohanrs · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Renato_Soares_Praia_da_Sepultura_Bombinhas_SC_(41539996032).jpg" target="_blank" rel="noopener">Bombinhas vista do alto</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:RenatoSoares_Praia_de_Bombas_Bombinhas_SC_(40251992834).jpg" target="_blank" rel="noopener">Praia de Bombas</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:ROGERIOCASSIMIRO_PRAIADOPRUMIRIM_UBATUBA_SP_(40248420274).jpg" target="_blank" rel="noopener">Praia do Prumirim</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:ROGERIOCASSIMIRO_IGREJAMATRIZ_UBATUBA_SP_(40957704871).jpg" target="_blank" rel="noopener">Igreja Matriz, no centro</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Praia_do_Itamambuca,_Brazil_(Unsplash).jpg" target="_blank" rel="noopener">Itamambuca</a> · Vanessa Bumbeers vansbumbeers · CC0</li><li><a href="https://commons.wikimedia.org/wiki/File:M._H._Mathias_Praia_Prumirim_-_Ubatuba,_SP,_Brasil_(36505158115).jpg" target="_blank" rel="noopener">Ilha do Prumirim</a> · MATHIAS, M H from Guaratinguetá, Brasil · CC BY 2.0</li><li><a href="https://commons.wikimedia.org/wiki/File:ROGERIO_CASSIMIRO_cachoeira_do_prumirim_UBATUBA_SP_(40879216014).jpg" target="_blank" rel="noopener">Mata Atlântica no Prumirim</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:View_of_Juquehy,_Brazil.jpg" target="_blank" rel="noopener">Juquehy</a> · Stefano Vigorelli · CC0</li><li><a href="https://commons.wikimedia.org/wiki/File:Praia_Camburi_-_S%C3%A3o_Sebasti%C3%A3o.jpg" target="_blank" rel="noopener">Camburi vista do alto</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:ROGERIO_CASSIMIRO_Rio_camburi_SAO_SEBASTIAO_SP.jpg" target="_blank" rel="noopener">Rio Camburi</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Igreja_de_Santa_Rita_de_C%C3%A1ssia_-_vista_da_ba%C3%ADa.jpg" target="_blank" rel="noopener">Igreja de Santa Rita, vista da baía</a> · Filipo tardim · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Centro_Hist%C3%B3rico_Paraty_7397.jpg" target="_blank" rel="noopener">Casarões do centro histórico</a> · Paul R. Burley · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Trilha_Cachada%C3%A7o_Trindade_Paraty_RJ_Vista_da_Praia.jpg" target="_blank" rel="noopener">Trindade</a> · Tomás R M de Paula · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Barcos_em_Paraty.jpg" target="_blank" rel="noopener">Barcos no cais</a> · Túllio F · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Caraguatatuba,Brasil.Praia_do_Capric%C3%B3rnio.jpg" target="_blank" rel="noopener">Praia do Capricórnio</a> · Monalisa Duarte dos Reis · CC BY-SA 3.0</li><li><a href="https://commons.wikimedia.org/wiki/File:ROGERIO_CASSIMIRO_Morro_Santo_Ant%C3%B4nio_CARAGUATATUBA_SP_(27276006428).jpg" target="_blank" rel="noopener">Morro Santo Antônio</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Praia_de_Mea%C3%ADpe_-_Guarapari.jpg" target="_blank" rel="noopener">Praia de Meaípe</a> · Túllio F · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:MarceloMoryan_PraiadoMorro_Guarapari_ES03_(40733208525).jpg" target="_blank" rel="noopener">Praia do Morro no verão</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:BRUNO_LIMA_PISCINAS_NATURAIS_DE_PORTO_DE_GALINHAS_IPOJUCA_PE_(27037766848).jpg" target="_blank" rel="noopener">Jangada nas piscinas naturais</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Porto_de_Galinhas_(Vila)_-_Setembro_2015.jpg" target="_blank" rel="noopener">A vila</a> · Rosanetur from Rio de Janeiro, Brazil · CC BY 2.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Pontal_de_Maraca%C3%ADpe.jpg" target="_blank" rel="noopener">Pontal de Maracaípe</a> · Klíssia Gouveia · CC BY-SA 4.0</li></ul></details>
+</footer>
+
+</main>
+
+<div class="install" id="install" hidden role="note">
+  <b>Abra como app</b>
+  <span>Toque em Compartilhar <svg viewBox="0 0 24 24"><path d="M12 15V3M8 7l4-4 4 4M5 12v8h14v-8"/></svg> e depois em <strong>Adicionar à Tela de Início</strong>. Assim ele abre em tela cheia e a ilha se encaixa na Dynamic Island.</span>
+  <button type="button" id="install-x" aria-label="Fechar dica">×</button>
+</div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Fotos do destino">
+  <button class="lb-close" id="lb-close" type="button" aria-label="Fechar fotos">×</button>
+  <button class="lb-nav prev" id="lb-prev" type="button" aria-label="Foto anterior">‹</button>
+  <button class="lb-nav next" id="lb-next" type="button" aria-label="Próxima foto">›</button>
+  <div class="lb-track" id="lb-track"></div>
+  <div class="lb-cap"><b id="lb-title"></b><span id="lb-credit"></span><span id="lb-n"></span></div>
+</div>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const GAL = {"ilhabela": [{"src": "img/ilhabela-ducha.jpg", "cap": "Poço da Ducha, na trilha da Água Branca", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:MaristelaColucci_PocodaDucha_TrilhadaAguaBranca_Ilhabela_SP_(39243992660).jpg"}, {"src": "img/ilhabela-cabras.jpg", "cap": "Ilha das Cabras", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:MaristelaColucci_IlhaDasCabras_Ilhabela_SP_(40344171464).jpg"}, {"src": "img/ilhabela.jpg", "cap": "Praia do Curral", "artist": "Lucailhabela", "license": "CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Praia-do-curral-ilhabela-sp.jpg"}, {"src": "img/ilhabela-jabaquara.jpg", "cap": "Praia do Jabaquara", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:MaristelaColucci_PraiadoJabaquara_Ilhabela_SP_(27181353098).jpg"}, {"src": "img/ilhabela-bonete.jpg", "cap": "Capela no Bonete", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:MaristelaColucci_PraiadoBonete_Ilhabela_SP_(26181933167).jpg"}, {"src": "img/ilhabela-vila.jpg", "cap": "Vila, o centrinho", "artist": "RODRIGO LEHSTEN", "license": "CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Ilhabela_09.JPG"}, {"src": "img/ilhabela-aerea.jpg", "cap": "Costão do Parque Estadual", "artist": "João D'Andretta", "license": "CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Parque_Estadual_de_Ilhabela_Jo%C3%A3o_Paulo_Marques_DAndretta_(1).jpg"}], "floripa": [{"src": "img/floripa.jpg", "cap": "Ilha do Campeche", "artist": "Luluhgomes", "license": "CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Ilha_do_Campeche_e_sua_natureza_exuberante.jpg"}, {"src": "img/floripa-campeche.jpg", "cap": "Praia do Campeche", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:DanielVianna_Praia_do_Campeche_Florianopolis_SC_(41528477152).jpg"}, {"src": "img/floripa-barra.jpg", "cap": "Barra da Lagoa", "artist": "Mx. Granger", "license": "CC0", "page": "https://commons.wikimedia.org/wiki/File:Barra_da_Lagoa_from_a_trail_nearby_(cropped).jpg"}, {"src": "img/floripa-lagoa.jpg", "cap": "Lagoa da Conceição", "artist": "Ezarate", "license": "CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:ViewLagoadaConceicao-feb2015.JPG"}], "bombinhas": [{"src": "img/bombinhas-quatroilhas.jpg", "cap": "Praia de Quatro Ilhas", "artist": "Gohanrs", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:Quatroilhas4.jpg"}, {"src": "img/bombinhas.jpg", "cap": "Bombinhas vista do alto", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:Renato_Soares_Praia_da_Sepultura_Bombinhas_SC_(41539996032).jpg"}, {"src": "img/bombinhas-bombas.jpg", "cap": "Praia de Bombas", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:RenatoSoares_Praia_de_Bombas_Bombinhas_SC_(40251992834).jpg"}], "ubatuba": [{"src": "img/ubatuba-prumirim3.jpg", "cap": "Praia do Prumirim", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:ROGERIOCASSIMIRO_PRAIADOPRUMIRIM_UBATUBA_SP_(40248420274).jpg"}, {"src": "img/ubatuba-igreja.jpg", "cap": "Igreja Matriz, no centro", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:ROGERIOCASSIMIRO_IGREJAMATRIZ_UBATUBA_SP_(40957704871).jpg"}, {"src": "img/ubatuba-itamambuca.jpg", "cap": "Itamambuca", "artist": "Vanessa Bumbeers vansbumbeers", "license": "CC0", "page": "https://commons.wikimedia.org/wiki/File:Praia_do_Itamambuca,_Brazil_(Unsplash).jpg"}, {"src": "img/ubatuba-prumirim2.jpg", "cap": "Ilha do Prumirim", "artist": "MATHIAS, M H from Guaratinguetá, Brasil", "license": "CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:M._H._Mathias_Praia_Prumirim_-_Ubatuba,_SP,_Brasil_(36505158115).jpg"}, {"src": "img/ubatuba.jpg", "cap": "Mata Atlântica no Prumirim", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:ROGERIO_CASSIMIRO_cachoeira_do_prumirim_UBATUBA_SP_(40879216014).jpg"}], "costasul": [{"src": "img/costasul.jpg", "cap": "Juquehy", "artist": "Stefano Vigorelli", "license": "CC0", "page": "https://commons.wikimedia.org/wiki/File:View_of_Juquehy,_Brazil.jpg"}, {"src": "img/costasul-camburi.jpg", "cap": "Camburi vista do alto", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:Praia_Camburi_-_S%C3%A3o_Sebasti%C3%A3o.jpg"}, {"src": "img/costasul-rio.jpg", "cap": "Rio Camburi", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:ROGERIO_CASSIMIRO_Rio_camburi_SAO_SEBASTIAO_SP.jpg"}], "paraty": [{"src": "img/paraty-igreja.jpg", "cap": "Igreja de Santa Rita, vista da baía", "artist": "Filipo tardim", "license": "CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Igreja_de_Santa_Rita_de_C%C3%A1ssia_-_vista_da_ba%C3%ADa.jpg"}, {"src": "img/paraty.jpg", "cap": "Casarões do centro histórico", "artist": "Paul R. Burley", "license": "CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Centro_Hist%C3%B3rico_Paraty_7397.jpg"}, {"src": "img/paraty-trindade.jpg", "cap": "Trindade", "artist": "Tomás R M de Paula", "license": "CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Trilha_Cachada%C3%A7o_Trindade_Paraty_RJ_Vista_da_Praia.jpg"}, {"src": "img/paraty-barcos.jpg", "cap": "Barcos no cais", "artist": "Túllio F", "license": "CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Barcos_em_Paraty.jpg"}], "caragua": [{"src": "img/caragua.jpg", "cap": "Praia do Capricórnio", "artist": "Monalisa Duarte dos Reis", "license": "CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Caraguatatuba,Brasil.Praia_do_Capric%C3%B3rnio.jpg"}, {"src": "img/caragua-morro.jpg", "cap": "Morro Santo Antônio", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:ROGERIO_CASSIMIRO_Morro_Santo_Ant%C3%B4nio_CARAGUATATUBA_SP_(27276006428).jpg"}], "guarapari": [{"src": "img/guarapari-meaipe.jpg", "cap": "Praia de Meaípe", "artist": "Túllio F", "license": "CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Praia_de_Mea%C3%ADpe_-_Guarapari.jpg"}, {"src": "img/guarapari-morro.jpg", "cap": "Praia do Morro no verão", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:MarceloMoryan_PraiadoMorro_Guarapari_ES03_(40733208525).jpg"}], "porto": [{"src": "img/porto.jpg", "cap": "Jangada nas piscinas naturais", "artist": "MTur Destinos", "license": "Domínio público", "page": "https://commons.wikimedia.org/wiki/File:BRUNO_LIMA_PISCINAS_NATURAIS_DE_PORTO_DE_GALINHAS_IPOJUCA_PE_(27037766848).jpg"}, {"src": "img/porto-vila.jpg", "cap": "A vila", "artist": "Rosanetur from Rio de Janeiro, Brazil", "license": "CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Porto_de_Galinhas_(Vila)_-_Setembro_2015.jpg"}, {"src": "img/porto-maracaipe.jpg", "cap": "Pontal de Maracaípe", "artist": "Klíssia Gouveia", "license": "CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Pontal_de_Maraca%C3%ADpe.jpg"}]}, DEST = {"ilhabela": {"name": "Ilhabela", "total": 4930, "color": "#30B0C7"}, "floripa": {"name": "Florianópolis", "total": 5880, "color": "#007AFF"}, "bombinhas": {"name": "Bombinhas", "total": 5970, "color": "#34C759"}, "ubatuba": {"name": "Ubatuba", "total": 4800, "color": "#5AC8FA"}, "costasul": {"name": "Costa Sul", "total": 4590, "color": "#FF9500"}, "paraty": {"name": "Paraty", "total": 4950, "color": "#AF52DE"}, "caragua": {"name": "Caraguatatuba", "total": 4370, "color": "#A2845E"}, "guarapari": {"name": "Guarapari", "total": 5810, "color": "#FF2D55"}, "porto": {"name": "Porto de Galinhas", "total": 6210, "color": "#FF3B30"}}, ORDER = ["ilhabela", "floripa", "bombinhas", "ubatuba", "costasul", "paraty", "caragua", "guarapari", "porto"];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const brl = n => 'R$ ' + n.toLocaleString('pt-BR');
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  };
+
+  /* ---------- modo app: encaixe na Dynamic Island física ---------- */
+  const root = document.documentElement;
+  const isIOS = /iP(hone|od)/.test(navigator.userAgent);
+  const standalone = navigator.standalone === true || matchMedia('(display-mode: standalone)').matches;
+  const probe = document.createElement('div');
+  probe.style.cssText = 'position:fixed;top:0;left:0;padding-top:env(safe-area-inset-top,0px);visibility:hidden;pointer-events:none';
+  document.body.append(probe);
+  let sat = parseFloat(getComputedStyle(probe).paddingTop) || 0;
+  probe.remove();
+  const forced = new URLSearchParams(location.search).get('di');   /* ?di=59 simula o iPhone 16 para teste */
+  if (forced) sat = parseFloat(forced) || 59;
+  const DI = !!forced || (isIOS && standalone && sat >= 50);
+  if (DI) {
+    root.classList.add('di');
+    root.style.setProperty('--sat', sat + 'px');
+    root.style.setProperty('--di-top', Math.max(8, sat - 49) + 'px');
+    root.style.setProperty('--di-w', '128px');
+    root.style.setProperty('--di-h', '38px');
+  }
+  const short = n => (n / 1000).toFixed(1).replace('.', ',') + 'k';
+
+  /* vibração real: no iOS 18+ um interruptor nativo gera feedback tátil */
+  let hapticLabel = null;
+  function haptic() {
+    try {
+      if (!hapticLabel) {
+        const inp = document.createElement('input');
+        inp.type = 'checkbox'; inp.setAttribute('switch', ''); inp.id = 'hp-sw'; inp.tabIndex = -1;
+        inp.setAttribute('aria-hidden', 'true');
+        hapticLabel = document.createElement('label'); hapticLabel.htmlFor = 'hp-sw'; hapticLabel.setAttribute('aria-hidden', 'true');
+        const hide = 'position:fixed;left:-20px;top:0;width:1px;height:1px;opacity:0;pointer-events:none';
+        inp.style.cssText = hide; hapticLabel.style.cssText = hide;
+        document.body.append(inp, hapticLabel);
+      }
+      hapticLabel.click();
+    } catch (e) {}
+    if (navigator.vibrate) { try { navigator.vibrate(8); } catch (e) {} }
+  }
+
+  /* ---------- favoritos ---------- */
+  let favs = store.get('feriado-favs', []);
+  if (!Array.isArray(favs)) favs = [];
+  favs = favs.filter(id => DEST[id]);
+  const sortedFavs = () => ORDER.filter(id => favs.includes(id));
+  function renderFavs() {
+    $$('.fav').forEach(b => b.setAttribute('aria-pressed', favs.includes(b.dataset.fav) ? 'true' : 'false'));
+    const list = $('#fav-list'); list.textContent = '';
+    sortedFavs().forEach(id => {
+      const li = document.createElement('li'); li.style.setProperty('--hue', DEST[id].color);
+      const a = document.createElement('a'); a.href = '#' + id; a.textContent = DEST[id].name;
+      const b = document.createElement('b'); b.className = 'num'; b.textContent = brl(DEST[id].total);
+      li.append(a, b); list.append(li);
+    });
+    const any = sortedFavs().length > 0;
+    $('#fav-empty').hidden = any; $('#copy').disabled = !any;
+    updateIsland();
+  }
+  function toggleFav(id) {
+    const on = !favs.includes(id);
+    favs = on ? [...favs, id] : favs.filter(x => x !== id);
+    store.set('feriado-favs', favs); renderFavs(); haptic();
+    toast(on ? '♥ ' + DEST[id].name + ' nos favoritos' : DEST[id].name + ' saiu da lista');
+  }
+
+  /* ---------- ilha ---------- */
+  const isl = $('#island'), ic = $('#isl-c'), ix = $('#isl-x');
+  const TARGET = new Date('2027-02-04T23:30:00-03:00').getTime();
+  let current = null, open = false, toastTimer = 0, bannerTimer = 0, bannerDelay = 0;
+  function tick() {
+    let ms = Math.max(0, TARGET - Date.now());
+    const d = Math.floor(ms / 864e5); ms -= d * 864e5;
+    const h = Math.floor(ms / 36e5); ms -= h * 36e5;
+    const m = Math.floor(ms / 6e4); const s = Math.floor((ms - m * 6e4) / 1e3);
+    $('#cd-d').textContent = d; $('#cd-h').textContent = String(h).padStart(2, '0');
+    $('#cd-m').textContent = String(m).padStart(2, '0'); $('#cd-s').textContent = String(s).padStart(2, '0');
+    if (!current) $('#ic-right').textContent = DI ? d + 'd' : d + ' dias';
+  }
+  function updateIsland() {
+    const d = current && DEST[current];
+    $('#ic-dot').style.background = d ? d.color : '#30D158';
+    $('#ic-label').textContent = d ? d.name : 'Feriado a dois';
+    if (d) $('#ic-right').textContent = DI ? short(d.total) : brl(d.total); else tick();
+    $('#ic-heart').hidden = !(d && favs.includes(current));
+    isl.classList.toggle('mid', !!d);
+    $('#ix-name').textContent = d ? d.name : 'Escolha um destino';
+    $('#ix-total').textContent = d ? brl(d.total) : 'até R$ 6.000';
+    const fill = $('#ix-fill');
+    fill.style.width = d ? Math.min(100, d.total / 6400 * 100) + '%' : '0%';
+    fill.style.background = d ? d.color : 'transparent';
+    const fb = $('#ix-fav'); fb.hidden = !d;
+    if (d) { const on = favs.includes(current); fb.textContent = on ? '♥ Favorito' : '♡ Favoritar'; fb.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+    const i = ORDER.indexOf(current);
+    $('#ix-next').textContent = !d ? 'Ver a favorita' : (i < ORDER.length - 1 ? 'Próximo destino' : 'Ver nossa lista');
+  }
+  function setOpen(v) {
+    open = v; isl.classList.toggle('open', v); isl.classList.remove('toast', 'banner');
+    clearTimeout(bannerDelay); clearTimeout(bannerTimer);
+    ic.setAttribute('aria-expanded', v ? 'true' : 'false');
+    ix.inert = !v; ix.setAttribute('aria-hidden', v ? 'false' : 'true');
+    updateIsland();
+    if (v) $('#ix-close').focus({ preventScroll: true });
+  }
+  function toast(msg) {
+    if (open) return;
+    isl.classList.remove('banner'); clearTimeout(bannerDelay); clearTimeout(bannerTimer);
+    $('#it-msg').textContent = msg; isl.classList.add('toast');
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => isl.classList.remove('toast'), 1800);
+  }
+  function banner(id) {
+    clearTimeout(bannerDelay);
+    if (!DI || open || reduce) return;
+    bannerDelay = setTimeout(() => {
+      if (current !== id || open || isl.classList.contains('toast')) return;
+      const d = DEST[id], sobra = 6000 - d.total;
+      $('#ib-dot').style.background = d.color; $('#ib-name').textContent = d.name;
+      $('#ib-sub').textContent = brl(d.total) + ' · ' + (sobra >= 0 ? 'sobram ' + brl(sobra) : 'passa ' + brl(-sobra));
+      isl.classList.add('banner');
+      clearTimeout(bannerTimer); bannerTimer = setTimeout(() => isl.classList.remove('banner'), 2200);
+    }, 380);
+  }
+  ic.addEventListener('click', () => { haptic(); setOpen(!open); });
+  $('.isl-b').addEventListener('click', () => { haptic(); setOpen(true); });
+  $('#ix-close').addEventListener('click', () => { setOpen(false); ic.focus({ preventScroll: true }); });
+  $('#ix-fav').addEventListener('click', () => { if (current) toggleFav(current); });
+  $('#ix-next').addEventListener('click', () => {
+    let target;
+    if (!current) target = document.getElementById(ORDER[0]);
+    else { const i = ORDER.indexOf(current); target = i < ORDER.length - 1 ? document.getElementById(ORDER[i + 1]) : $('#lista'); }
+    setOpen(false);
+    target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  });
+  document.addEventListener('click', e => {
+    if (e.target.id === 'hp-sw' || e.target === hapticLabel) return;
+    const fav = e.target.closest('.fav'); if (fav) toggleFav(fav.dataset.fav);
+    const g = e.target.closest('.g-item'); if (g) openLB(g.dataset.g, +g.dataset.i);
+    if (open && !isl.contains(e.target)) setOpen(false);
+  });
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const id = e.target.dataset.chapter || null;
+      if (id === current) return;
+      current = id; updateIsland();
+      if (!id) { isl.classList.remove('banner'); clearTimeout(bannerDelay); }
+      if (id && DI) banner(id);
+      else if (id && !open && !reduce) { isl.classList.remove('pop'); void isl.offsetWidth; isl.classList.add('pop'); }
+    });
+  }, { rootMargin: '-50% 0px -50% 0px' });
+  $$('[data-chapter],[data-plain]').forEach(s => io.observe(s));
+
+  /* galerias: carrega todas as fotos da faixa quando ela se aproxima da tela */
+  const galIO = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      $$('img', e.target).forEach(img => { img.loading = 'eager'; });
+      galIO.unobserve(e.target);
+    });
+  }, { rootMargin: '900px 0px' });
+  $$('.gallery').forEach(g => galIO.observe(g));
+
+  /* ---------- fotos em tela cheia ---------- */
+  const lb = $('#lb'), track = $('#lb-track');
+  let lbItems = [], lastFocus = null;
+  function capLB(i) {
+    const it = lbItems[i]; if (!it) return;
+    $('#lb-title').textContent = it.cap;
+    $('#lb-credit').textContent = 'Foto: ' + it.artist + ' · ' + it.license;
+    $('#lb-n').textContent = (i + 1) + ' de ' + lbItems.length;
+  }
+  function openLB(g, i) {
+    lbItems = GAL[g] || []; if (!lbItems.length) return;
+    track.textContent = '';
+    lbItems.forEach(it => {
+      const f = document.createElement('figure'), img = document.createElement('img');
+      img.src = it.src; img.alt = it.cap; img.decoding = 'async'; f.append(img); track.append(f);
+    });
+    lastFocus = document.activeElement; haptic();
+    lb.hidden = false; document.documentElement.classList.add('lock');
+    requestAnimationFrame(() => { track.scrollLeft = i * track.clientWidth; capLB(i); $('#lb-close').focus({ preventScroll: true }); });
+  }
+  function closeLB() {
+    lb.hidden = true; document.documentElement.classList.remove('lock');
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+  track.addEventListener('scroll', () => capLB(Math.round(track.scrollLeft / Math.max(1, track.clientWidth))), { passive: true });
+  $('#lb-close').addEventListener('click', closeLB);
+  $('#lb-prev').addEventListener('click', () => track.scrollBy({ left: -track.clientWidth, behavior: 'smooth' }));
+  $('#lb-next').addEventListener('click', () => track.scrollBy({ left: track.clientWidth, behavior: 'smooth' }));
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (!lb.hidden) closeLB(); else if (open) { setOpen(false); ic.focus({ preventScroll: true }); }
+  });
+
+  /* ---------- copiar lista ---------- */
+  $('#copy').addEventListener('click', () => {
+    const txt = 'Minhas favoritas para o feriado (4 a 9/fev):\n' +
+      sortedFavs().map((id, i) => (i + 1) + '. ' + DEST[id].name + ' – ' + brl(DEST[id].total)).join('\n');
+    const fallback = () => { const ta = $('#copy-fallback'); ta.hidden = false; ta.value = txt; ta.focus(); ta.select(); toast('Texto selecionado: é só copiar'); };
+    try {
+      navigator.clipboard.writeText(txt).then(() => toast('Copiado! Cola no WhatsApp'), fallback);
+    } catch (e) { fallback(); }
+  });
+
+  /* ---------- checklist ---------- */
+  const checks = store.get('feriado-checks', {});
+  const boxes = $$('.check input');
+  const countChecks = () => { $('#check-n').textContent = boxes.filter(b => b.checked).length + ' de ' + boxes.length; };
+  boxes.forEach(cb => {
+    cb.checked = !!(checks && checks[cb.id]);
+    cb.addEventListener('change', () => { checks[cb.id] = cb.checked; store.set('feriado-checks', checks); countChecks(); });
+  });
+  countChecks();
+
+  /* ---------- efeitos de rolagem ---------- */
+  const hero = $('.hero'), heroImg = $('.hero-bg img'), heroTxt = $('.hero-txt'), cue = $('.cue');
+  const chapters = $$('.chapter').map(el => ({ el, img: $('.ch-bg img', el), shade: $('.ch-shade', el) }));
+  const reveals = $$('[data-reveal]'), counts = $$('[data-count]'), grows = $$('[data-grow]');
+  const cmp = $('.cmp'), tl = $('.tl'), tlFill = $('#tl-fill'), steps = $$('.tl li');
+  const counted = new WeakSet();
+  tl.classList.add('js');
+  function countUp(el) {
+    const end = +el.dataset.count, t0 = performance.now(), dur = 900;
+    const step = t => {
+      const k = clamp((t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = brl(k < 1 ? Math.round(end * e / 10) * 10 : end);
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  let raf = 0;
+  function frame() {
+    raf = 0;
+    const vh = innerHeight;
+    if (!reduce) {
+      const hr = hero.getBoundingClientRect(), hp = clamp(-hr.top / hr.height);
+      heroImg.style.transform = 'translate3d(0,' + (hp * 30) + '%,0) scale(' + (1.05 + hp * .2) + ')';
+      heroTxt.style.transform = 'translate3d(0,' + (-hp * 90) + 'px,0)';
+      heroTxt.style.opacity = String(clamp(1 - hp * 1.3));
+      cue.style.opacity = String(clamp(1 - hp * 4));
+      for (const c of chapters) {
+        const r = c.el.getBoundingClientRect();
+        if (r.bottom < -50 || r.top > vh + 50) continue;
+        const p = clamp((vh - r.top) / vh);
+        c.img.style.transform = 'scale(' + (1.22 - .22 * p) + ')';
+        const q = clamp(-r.top / Math.max(1, r.height - vh));
+        c.shade.style.opacity = String(.6 + q * .4);
+      }
+      for (const el of reveals) {
+        const r = el.getBoundingClientRect();
+        if (r.top > vh + 40 || r.bottom < -40) continue;
+        const p = clamp((vh - r.top) / (vh * .3));
+        el.style.transform = 'translate3d(0,' + ((1 - p) * 40) + 'px,0) scale(' + (.95 + .05 * p) + ')';
+        el.style.opacity = String(.35 + .65 * p);
+      }
+      for (const el of counts) {
+        if (counted.has(el)) continue;
+        if (el.getBoundingClientRect().top < vh * .9) { counted.add(el); countUp(el); }
+      }
+      const cr = cmp.getBoundingClientRect(), cp = clamp((vh - cr.top) / (vh * .55));
+      grows.forEach((g, i) => { g.style.transform = 'scaleX(' + clamp(cp * 1.35 - i * .05) + ')'; });
+    }
+    const tr = tl.getBoundingClientRect();
+    tlFill.style.transform = 'scaleY(' + clamp((vh * .62 - tr.top) / tr.height) + ')';
+    steps.forEach(li => li.classList.toggle('on', li.getBoundingClientRect().top + 20 < vh * .62));
+  }
+  const onScroll = () => { if (!raf) raf = requestAnimationFrame(frame); };
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+
+  /* dica de instalar: só no Safari do iPhone, fora do app e fora de molduras */
+  let inFrame = true; try { inFrame = window.top !== window; } catch (e) {}
+  if (isIOS && !standalone && !inFrame && !store.get('feriado-install-x', false)) $('#install').hidden = false;
+  $('#install-x').addEventListener('click', () => { $('#install').hidden = true; store.set('feriado-install-x', true); });
+
+  setOpen(false); renderFavs(); tick(); frame();
+  setInterval(tick, 1000);
+})();
+</script>
+
+</body>
+</html>
