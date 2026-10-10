@@ -58,6 +58,7 @@ button{font:inherit;color:inherit;cursor:pointer}
   width:var(--iw,200px);height:var(--ih,36px);border-radius:var(--ir,18px);background:#000;color:#fff;overflow:hidden;
   box-shadow:0 10px 30px rgba(0,0,0,.28),0 0 0 .5px rgba(255,255,255,.08);
   transition:width .55s cubic-bezier(.2,1.2,.35,1),height .55s cubic-bezier(.2,1.2,.35,1),border-radius .45s ease}
+html .island.boot{visibility:hidden;transition:none!important}
 .island.mid{--iw:252px}
 .island.toast{--iw:280px;--ih:44px;--ir:22px}
 .island.open{--iw:min(calc(100vw - 20px),420px);--ih:230px;--ir:38px}
@@ -94,29 +95,25 @@ button{font:inherit;color:inherit;cursor:pointer}
 .island.banner .isl-c{opacity:0;pointer-events:none}
 .island.banner .isl-b{opacity:1;pointer-events:auto;cursor:pointer}
 
-/* ---------- modo app: ilha encaixada na Dynamic Island física ----------
-   Medidas (pt): ilha física 125,33 × 36,67; topo 11,33 (iPhone 16, área segura 59) ou 14 (17 Pro Max, área segura 62).
-   Em repouso a cápsula cobre só a câmera e mostra um ponto e um valor curto nas laterais (cabe entre o relógio e o sinal).
-   Ao trocar de destino ela expande para 371 / 408 de largura (Live Activity), com o conteúdo abaixo da câmera.
-   No modo app a página rola dentro de .app, e não no documento, para o iOS não embaçar o topo. */
+/* ---------- modo app: animação saindo da Dynamic Island ----------
+   Em repouso nada fica desenhado no topo (o iOS 26 desfoca essa faixa).
+   Ao trocar de destino, favoritar ou abrir, uma cápsula preta nasce exatamente sobre a câmera
+   (125,33 × 36,67 pt; topo 11,33 no iPhone 16 e 14 no 17 Pro Max), estica para baixo e se solta
+   como um cartão flutuante logo abaixo da área desfocada, onde o texto fica nítido. Depois volta para a câmera. */
 .sb-scrim{display:none}
-/* Barra de status preta: o iOS 26 só deixa de aplicar o desfoque no topo quando uma caixa fixa,
-   de largura total e cor sólida, cobre a borda de cima. A ilha física fica dentro do preto. */
-html.di .sb-scrim{display:block;position:fixed;z-index:55;top:0;left:0;right:0;height:54px;background:#000}
-html.di,html.di body{height:100%;overflow:hidden}
-html.di .app{position:fixed;inset:0;margin:0 auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none}
-html.di.lock .app{overflow:hidden}
-html.di .island{top:var(--di-top);box-shadow:none;
-  --iw:calc(var(--di-hw) + 50px);--ih:var(--di-hh);--ir:calc(var(--di-hh) / 2)}
-html.di .island.toast,html.di .island.banner{--iw:min(var(--di-xw),calc(100vw - 12px));--ih:86px;--ir:42px}
-html.di .island.open{--iw:min(var(--di-xw),calc(100vw - 12px));--ih:252px;--ir:44px}
-html.di .isl-c{padding:0 5px 0 8px;gap:3px}
-html.di .isl-c .lab{display:none}
-html.di .isl-c .dot{width:9px;height:9px;box-shadow:none}
-html.di .isl-c .right{margin-left:auto;font:700 10.5px/1 var(--fr);letter-spacing:-.03em}
-html.di .isl-t,html.di .isl-b{padding-top:calc(var(--di-hh) + 2px)}
-html.di .isl-x{padding-top:calc(var(--di-hh) + 10px)}
-html.di .hero-txt{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+html.di .isl-c{display:none}
+html.di .island{top:var(--di-top);opacity:0;pointer-events:none;box-shadow:none;
+  --iw:var(--di-hw);--ih:var(--di-hh);--ir:calc(var(--di-hh) / 2);
+  transition:top .55s cubic-bezier(.3,1.2,.4,1),width .55s cubic-bezier(.3,1.2,.4,1),height .55s cubic-bezier(.3,1.2,.4,1),
+             border-radius .45s ease,opacity .15s linear,box-shadow .4s ease}
+html.di .island.st-grow{opacity:1;--iw:calc(var(--di-hw) + 64px);--ih:118px;--ir:42px}
+html.di .island.st-card{opacity:1;pointer-events:auto;top:var(--card-top);
+  --iw:min(var(--di-xw),calc(100vw - 16px));--ih:90px;--ir:30px;box-shadow:0 18px 48px rgba(0,0,0,.38)}
+html.di .island.st-card.open{--ih:252px;--ir:36px}
+html.di .isl-t,html.di .isl-b{padding-top:0}
+html.di .island:not(.st-card) .isl-t,html.di .island:not(.st-card) .isl-b,html.di .island:not(.st-card) .isl-x{opacity:0!important}
+html.di .isl-b b{font-size:19px}
+html.di .isl-b span{font-size:14px}
 
 /* painel de ajuste da ilha */
 .ix-r{display:flex;gap:8px;align-items:center}
@@ -307,7 +304,7 @@ html.di .hero-txt{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
 </svg>
 
 <div class="sb-scrim" aria-hidden="true"></div>
-<div class="island" id="island">
+<div class="island boot" id="island">
   <button class="isl-c" id="isl-c" type="button" aria-expanded="false" aria-controls="isl-x" aria-label="Abrir resumo da viagem">
     <span class="dot" id="ic-dot"></span><span class="lab" id="ic-label">Feriado a dois</span>
     <svg class="ic mini" id="ic-heart" hidden aria-hidden="true"><use href="#i-heart"></use></svg>
@@ -800,6 +797,8 @@ html.di .hero-txt{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
     if (on) {
       root.style.setProperty('--di-hw', '126.33px');
       root.style.setProperty('--di-hh', '37.67px');
+      root.style.setProperty('--card-top', (satUse + 44) + 'px');            /* abaixo do desfoque do iOS (~40 pt) */
+      if (!applyDI.welcomed) { applyDI.welcomed = true; setTimeout(() => { if (typeof welcome === 'function') welcome(); }, 1300); }
       root.style.setProperty('--di-top', top + 'px');
       root.style.setProperty('--di-cw', (big ? 250 : 230) + 'px');
       root.style.setProperty('--di-xw', (big ? 408 : 371) + 'px');
@@ -896,12 +895,18 @@ html.di .hero-txt{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
     ic.setAttribute('aria-expanded', v ? 'true' : 'false');
     ix.inert = !v; ix.setAttribute('aria-hidden', v ? 'false' : 'true');
     updateIsland();
+    if (DI) {
+      if (v) { diClear(); isl.classList.add('st-grow'); diTimers.push(setTimeout(() => isl.classList.add('st-card'), reduce ? 0 : 200)); }
+      else if (isl.classList.contains('st-card')) diHide();
+    }
     if (v) $('#ix-close').focus({ preventScroll: true });
   }
   function toast(msg) {
     if (open) return;
     isl.classList.remove('banner'); clearTimeout(bannerDelay); clearTimeout(bannerTimer);
-    $('#it-msg').textContent = msg; isl.classList.add('toast');
+    $('#it-msg').textContent = msg;
+    if (DI) { diShow('toast'); return; }
+    isl.classList.add('toast');
     clearTimeout(toastTimer); toastTimer = setTimeout(() => isl.classList.remove('toast'), 1800);
   }
   function banner(id) {
@@ -912,12 +917,38 @@ html.di .hero-txt{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
       const d = DEST[id], sobra = 6000 - d.total;
       $('#ib-dot').style.background = d.color; $('#ib-name').textContent = d.name;
       $('#ib-sub').textContent = brl(d.total) + ' · ' + (sobra >= 0 ? 'sobram ' + brl(sobra) : 'passa ' + brl(-sobra));
-      isl.classList.add('banner');
-      clearTimeout(bannerTimer); bannerTimer = setTimeout(() => isl.classList.remove('banner'), 2200);
+      diShow('banner');
     }, 380);
+  }
+  /* sequência da animação: nasce na câmera, estica, vira cartão; depois volta para a câmera */
+  let diTimers = [];
+  const diClear = () => { diTimers.forEach(clearTimeout); diTimers = []; };
+  function diShow(kind) {
+    diClear();
+    isl.classList.remove('banner', 'toast'); isl.classList.add(kind);
+    if (!isl.classList.contains('st-card')) {
+      isl.classList.add('st-grow');
+      diTimers.push(setTimeout(() => isl.classList.add('st-card'), reduce ? 0 : 230));
+    }
+    diTimers.push(setTimeout(() => { if (!open) diHide(); }, 3600));
+  }
+  function diHide() {
+    diClear();
+    isl.classList.remove('st-card');
+    diTimers.push(setTimeout(() => isl.classList.remove('st-grow', 'banner', 'toast'), reduce ? 0 : 280));
+  }
+  function welcome() {
+    if (!DI || open) return;
+    const days = Math.max(0, Math.floor((TARGET - Date.now()) / 864e5));
+    $('#it-msg').textContent = 'Faltam ' + days + ' dias para o feriado';
+    diShow('toast');
   }
   ic.addEventListener('click', () => { haptic(); setOpen(!open); });
   $('.isl-b').addEventListener('click', () => { haptic(); setOpen(true); });
+  isl.addEventListener('click', e => {
+    if (!DI || open || !isl.classList.contains('st-card') || e.target.closest('button')) return;
+    haptic(); setOpen(true);
+  });
   $('#ix-close').addEventListener('click', () => { setOpen(false); ic.focus({ preventScroll: true }); });
   $('#ix-fav').addEventListener('click', () => { if (current) toggleFav(current); });
   $('#ix-next').addEventListener('click', () => {
@@ -1088,6 +1119,7 @@ html.di .hero-txt{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
   /* o iOS pode informar a área segura só depois de abrir: mede de novo algumas vezes */
   applyDI();
   requestAnimationFrame(applyDI);
+  setTimeout(() => $('#island').classList.remove('boot'), 400);
   [250, 800, 2000].forEach(t => setTimeout(applyDI, t));
   addEventListener('resize', applyDI);
   addEventListener('orientationchange', () => setTimeout(applyDI, 300));
