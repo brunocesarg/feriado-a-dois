@@ -1,0 +1,106 @@
+{
+ "atualizado": "2026-10-09T12:00-03:00",
+ "fonte": "Google Voos (pesquisa manual)",
+ "datas": {
+  "ida": "2027-02-05",
+  "volta": "2027-02-09"
+ },
+ "rotas": {
+  "floripa": {
+   "nome": "Florianópolis",
+   "preco": 900,
+   "ref": 900,
+   "min": 900,
+   "total": 5880,
+   "cabe": true,
+   "promo": false,
+   "promo_texto": null,
+   "historico": [
+    [
+     "2026-10-09",
+     900
+    ]
+   ]
+  },
+  "bombinhas": {
+   "nome": "Bombinhas (voo p/ Navegantes)",
+   "preco": 866,
+   "ref": 866,
+   "min": 866,
+   "total": 5970,
+   "cabe": true,
+   "promo": false,
+   "promo_texto": null,
+   "historico": [
+    [
+     "2026-10-09",
+     866
+    ]
+   ]
+  },
+  "guarapari": {
+   "nome": "Guarapari (voo p/ Vitória)",
+   "preco": 770,
+   "ref": 770,
+   "min": 770,
+   "total": 5810,
+   "cabe": true,
+   "promo": false,
+   "promo_texto": null,
+   "historico": [
+    [
+     "2026-10-09",
+     770
+    ]
+   ]
+  },
+  "porto": {
+   "nome": "Porto de Galinhas (voo p/ Recife)",
+   "preco": 1379,
+   "ref": 1379,
+   "min": 1379,
+   "total": 6210,
+   "cabe": false,
+   "promo": false,
+   "promo_texto": null,
+   "historico": [
+    [
+     "2026-10-09",
+     1379
+    ]
+   ]
+  },
+  "maceio": {
+   "nome": "Maceió",
+   "preco": 1779,
+   "ref": 1779,
+   "min": 1779,
+   "total": 7500,
+   "cabe": false,
+   "promo": false,
+   "promo_texto": null,
+   "historico": [
+    [
+     "2026-10-09",
+     1779
+    ]
+   ]
+  },
+  "jpa": {
+   "nome": "João Pessoa",
+   "preco": 1442,
+   "ref": 1442,
+   "min": 1442,
+   "total": 6800,
+   "cabe": false,
+   "promo": false,
+   "promo_texto": null,
+   "historico": [
+    [
+     "2026-10-09",
+     1442
+    ]
+   ]
+  }
+ }
+}
