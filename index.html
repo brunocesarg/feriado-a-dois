@@ -753,7 +753,7 @@ html.di .hero-txt{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
     root.style.setProperty('--di-w', '128px');
     root.style.setProperty('--di-h', '38px');
   }
-  const short = n => (n / 1000).toFixed(1).replace('.', ',') + 'k';
+  const short = n => (Math.floor(n / 10) / 100).toFixed(2).replace('.', ',') + 'k';
 
   /* vibração real: no iOS 18+ um interruptor nativo gera feedback tátil */
   let hapticLabel = null;
