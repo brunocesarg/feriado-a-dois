@@ -96,19 +96,24 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 /* ---------- modo app: ilha encaixada na Dynamic Island física ----------
    Medidas (pt): ilha física 125,33 × 36,67; topo 11,33 (iPhone 16, área segura 59) ou 14 (17 Pro Max, área segura 62).
-   Live Activity: compacta 230 / 250 de largura, expandida 371 / 408, cantos de 44.
-   A faixa da barra de status (até 54 pt) não recebe toques no iOS, então o conteúdo tocável fica abaixo dela. */
+   Em repouso a cápsula cobre só a câmera e mostra um ponto e um valor curto nas laterais (cabe entre o relógio e o sinal).
+   Ao trocar de destino ela expande para 371 / 408 de largura (Live Activity), com o conteúdo abaixo da câmera.
+   No modo app a página rola dentro de .app, e não no documento, para o iOS não embaçar o topo. */
 .sb-scrim{display:none}
-html.di .sb-scrim{display:block;position:fixed;z-index:55;left:0;right:0;top:0;height:var(--sat);background:#000;pointer-events:none}
+html.di,html.di body{height:100%;overflow:hidden}
+html.di .app{position:fixed;inset:0;margin:0 auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none}
+html.di.lock .app{overflow:hidden}
 html.di .island{top:var(--di-top);box-shadow:none;
-  --iw:var(--di-cw);--ih:calc(var(--sat) - var(--di-top) + 28px);--ir:24px}
-html.di .island.toast,html.di .island.banner{--iw:min(var(--di-xw),calc(100vw - 12px));--ih:calc(var(--sat) - var(--di-top) + 64px);--ir:44px}
-html.di .island.open{--iw:min(var(--di-xw),calc(100vw - 12px));--ih:calc(var(--sat) - var(--di-top) + 206px);--ir:44px}
-html.di .isl-c{align-items:flex-end;padding:0 18px 7px}
-html.di .isl-t,html.di .isl-b{padding-top:calc(var(--sat) - var(--di-top) + 2px)}
-html.di .isl-x{padding-top:calc(var(--sat) - var(--di-top) + 4px)}
+  --iw:calc(var(--di-hw) + 50px);--ih:var(--di-hh);--ir:calc(var(--di-hh) / 2)}
+html.di .island.toast,html.di .island.banner{--iw:min(var(--di-xw),calc(100vw - 12px));--ih:86px;--ir:42px}
+html.di .island.open{--iw:min(var(--di-xw),calc(100vw - 12px));--ih:252px;--ir:44px}
+html.di .isl-c{padding:0 5px 0 8px;gap:3px}
+html.di .isl-c .lab{display:none}
+html.di .isl-c .dot{width:9px;height:9px;box-shadow:none}
+html.di .isl-c .right{margin-left:auto;font:700 10.5px/1 var(--fr);letter-spacing:-.03em}
+html.di .isl-t,html.di .isl-b{padding-top:calc(var(--di-hh) + 2px)}
+html.di .isl-x{padding-top:calc(var(--di-hh) + 10px)}
 html.di .hero-txt{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
-html.di .lb-close{top:calc(var(--sat) + 8px)}
 
 /* painel de ajuste da ilha */
 .ix-r{display:flex;gap:8px;align-items:center}
@@ -727,7 +732,7 @@ html.di .lb-close{top:calc(var(--sat) + 8px)}
   <p id="cal-diag"></p>
   <div class="seg" role="group" aria-label="Modo da ilha"><button type="button" data-mode="auto">Automático</button><button type="button" data-mode="on">Encaixar</button><button type="button" data-mode="off">Flutuante</button></div>
   <div class="nudge"><span>Altura</span><button type="button" id="cal-up" aria-label="Subir meio ponto">↑</button><b id="cal-dy">0,0 pt</b><button type="button" id="cal-down" aria-label="Descer meio ponto">↓</button></div>
-  <p>"Encaixar" liga o modo Dynamic Island. Use as setas se a faixa preta ficar acima ou abaixo da barra de status. Fica salvo neste celular.</p>
+  <p>"Encaixar" liga o modo Dynamic Island. Se a cápsula preta não cobrir a câmera certinho, use as setas (meio ponto por toque). Fica salvo neste celular.</p>
   <div class="cal-act"><button class="btn" type="button" id="cal-reset">Restaurar</button><button class="btn primary" type="button" id="cal-close">Pronto</button></div>
 </div>
 
@@ -785,12 +790,13 @@ html.di .lb-close{top:calc(var(--sat) + 8px)}
     const on = diPref.mode === 'on' ? true : diPref.mode === 'off' ? false : auto;
     const big = Math.min(innerWidth, screen.width || innerWidth) > 402;          /* 17 Pro Max e outros de 430/440 pt */
     const satUse = sat >= 50 ? sat : (big ? 62 : 59);
-    const top = satUse === 59 ? 11.33 : satUse === 62 ? 14 : Math.max(8, satUse - 48); /* topo da ilha física por modelo */
-    const band = satUse + (+diPref.dy || 0);                                       /* ajuste fino feito no próprio celular */
-    diag = { app: st, sat, tela: screen.width + '×' + screen.height, janela: innerWidth + '×' + innerHeight, top };
+    const base = satUse === 59 ? 11.33 : satUse === 62 ? 14 : Math.max(8, satUse - 48); /* topo da ilha física por modelo */
+    const top = base + (+diPref.dy || 0) - .5;                                    /* meio ponto de folga para cobrir a borda */
+    diag = { app: st, sat, tela: screen.width + '×' + screen.height, janela: innerWidth + '×' + innerHeight, top: base + (+diPref.dy || 0) };
     if (on !== DI) { DI = on; root.classList.toggle('di', on); }
     if (on) {
-      root.style.setProperty('--sat', band + 'px');
+      root.style.setProperty('--di-hw', '126.33px');
+      root.style.setProperty('--di-hh', '37.67px');
       root.style.setProperty('--di-top', top + 'px');
       root.style.setProperty('--di-cw', (big ? 250 : 230) + 'px');
       root.style.setProperty('--di-xw', (big ? 408 : 371) + 'px');
@@ -801,7 +807,7 @@ html.di .lb-close{top:calc(var(--sat) + 8px)}
   function renderCal() {
     const c = document.getElementById('cal'); if (!c) return;
     document.getElementById('cal-diag').textContent =
-      'Modo app: ' + (diag.app ? 'sim' : 'não') + ' · área segura: ' + Math.round(diag.sat) + ' pt · tela: ' + diag.tela + ' · janela: ' + diag.janela;
+      'Modo app: ' + (diag.app ? 'sim' : 'não') + ' · área segura: ' + Math.round(diag.sat) + ' pt · ilha a ' + String(diag.top).replace('.', ',') + ' pt do topo · tela: ' + diag.tela + ' · janela: ' + diag.janela;
     document.getElementById('cal-dy').textContent = ((+diPref.dy || 0) > 0 ? '+' : '') + (+diPref.dy || 0).toFixed(1).replace('.', ',') + ' pt';
     c.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === diPref.mode ? 'true' : 'false'));
   }
@@ -862,13 +868,13 @@ html.di .lb-close{top:calc(var(--sat) + 8px)}
     const m = Math.floor(ms / 6e4); const s = Math.floor((ms - m * 6e4) / 1e3);
     $('#cd-d').textContent = d; $('#cd-h').textContent = String(h).padStart(2, '0');
     $('#cd-m').textContent = String(m).padStart(2, '0'); $('#cd-s').textContent = String(s).padStart(2, '0');
-    if (!current) $('#ic-right').textContent = d + ' dias';
+    if (!current) $('#ic-right').textContent = DI ? String(d) : d + ' dias';
   }
   function updateIsland() {
     const d = current && DEST[current];
     $('#ic-dot').style.background = d ? d.color : '#30D158';
     $('#ic-label').textContent = d ? d.name : 'Feriado a dois';
-    if (d) $('#ic-right').textContent = brl(d.total); else tick();
+    if (d) $('#ic-right').textContent = DI ? (Math.floor(d.total / 100) / 10).toFixed(1).replace('.', ',') + 'k' : brl(d.total); else tick();
     $('#ic-heart').hidden = !(d && favs.includes(current));
     isl.classList.toggle('mid', !!d);
     $('#ix-name').textContent = d ? d.name : 'Escolha um destino';
@@ -1054,6 +1060,7 @@ html.di .lb-close{top:calc(var(--sat) + 8px)}
   }
   const onScroll = () => { if (!raf) raf = requestAnimationFrame(frame); };
   addEventListener('scroll', onScroll, { passive: true });
+  $('.app').addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll);
 
   /* dica de instalar: só no Safari do iPhone, fora do app e fora de molduras */
