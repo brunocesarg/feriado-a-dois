@@ -110,6 +110,22 @@ html.di .isl-x{padding-top:calc(var(--sat) - var(--di-top) + 4px)}
 html.di .hero-txt{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
 html.di .lb-close{top:calc(var(--sat) + 8px)}
 
+/* painel de ajuste da ilha */
+.ix-r{display:flex;gap:8px;align-items:center}
+#ix-cal{height:30px;padding:0 12px;border-radius:15px;border:0;background:#2C2C2E;color:#fff;font:600 12px var(--f);text-transform:none;letter-spacing:0}
+.cal{position:fixed;z-index:75;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:500px;margin:0 auto;
+  background:var(--card);color:var(--label);border-radius:26px;padding:18px;box-shadow:0 12px 50px rgba(0,0,0,.4);display:grid;gap:12px}
+.cal b{font:700 18px/1.2 var(--f)}
+.cal p{font-size:13px;color:var(--label2)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--fill);padding:3px;border-radius:12px}
+.seg button{min-height:38px;border:0;border-radius:9px;background:none;font:600 14px var(--f)}
+.seg button[aria-pressed="true"]{background:var(--bg);box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.nudge{display:grid;grid-template-columns:1fr 52px 82px 52px;gap:8px;align-items:center;font-size:15px}
+.nudge button{min-height:46px;border-radius:13px;border:0;background:var(--fill);font:700 20px var(--f)}
+.nudge b{text-align:center;font:600 15px var(--fr)}
+.cal-act{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.foot .linkbtn{justify-self:start;border:0;background:none;padding:0;min-height:44px;color:var(--accent);font:600 13px var(--f)}
+
 /* dica para instalar como app */
 .install{position:fixed;z-index:70;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:500px;margin:0 auto;
   background:var(--glass);-webkit-backdrop-filter:blur(26px) saturate(1.7);backdrop-filter:blur(26px) saturate(1.7);
@@ -292,7 +308,7 @@ html.di .lb-close{top:calc(var(--sat) + 8px)}
   <div class="isl-t" aria-live="polite"><span id="it-msg"></span></div>
   <div class="isl-b" aria-hidden="true"><b><i id="ib-dot"></i><span id="ib-name"></span></b><span id="ib-sub"></span></div>
   <div class="isl-x" id="isl-x" aria-hidden="true" inert>
-    <div class="ix-top"><span>Saída em</span><button id="ix-close" type="button" aria-label="Fechar resumo">×</button></div>
+    <div class="ix-top"><span>Saída em</span><span class="ix-r"><button id="ix-cal" type="button">Ajustar ilha</button><button id="ix-close" type="button" aria-label="Fechar resumo">×</button></span></div>
     <div class="cd"><div><b id="cd-d">0</b><small>dias</small></div><div><b id="cd-h">00</b><small>horas</small></div><div><b id="cd-m">00</b><small>min</small></div><div><b id="cd-s">00</b><small>seg</small></div></div>
     <div class="ix-dest"><span id="ix-name">Escolha um destino</span><b class="num" id="ix-total">até R$ 6.000</b></div>
     <div class="ix-meter"><i id="ix-fill"></i><span class="cap"></span></div>
@@ -700,10 +716,20 @@ html.di .lb-close{top:calc(var(--sat) + 8px)}
 
 <footer class="foot" data-plain>
   <p>Preços pesquisados em 09/out/2026 no Google Voos, no Booking e no BusOn. Podem mudar até a compra.</p>
+  <button class="linkbtn" type="button" id="foot-cal">Ajustar a ilha do topo</button>
   <details><summary>Créditos das fotos (Wikimedia Commons)</summary><ul class="credits"><li><a href="https://commons.wikimedia.org/wiki/File:Renato_Soares_Praia_da_Sepultura_Bombinhas_SC_(41539996032).jpg" target="_blank" rel="noopener">Capa: Bombinhas</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:MaristelaColucci_PocodaDucha_TrilhadaAguaBranca_Ilhabela_SP_(39243992660).jpg" target="_blank" rel="noopener">Poço da Ducha, na trilha da Água Branca</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:MaristelaColucci_IlhaDasCabras_Ilhabela_SP_(40344171464).jpg" target="_blank" rel="noopener">Ilha das Cabras</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Praia-do-curral-ilhabela-sp.jpg" target="_blank" rel="noopener">Praia do Curral</a> · Lucailhabela · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:MaristelaColucci_PraiadoJabaquara_Ilhabela_SP_(27181353098).jpg" target="_blank" rel="noopener">Praia do Jabaquara</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:MaristelaColucci_PraiadoBonete_Ilhabela_SP_(26181933167).jpg" target="_blank" rel="noopener">Capela no Bonete</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Ilhabela_09.JPG" target="_blank" rel="noopener">Vila, o centrinho</a> · RODRIGO LEHSTEN · CC BY-SA 3.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Parque_Estadual_de_Ilhabela_Jo%C3%A3o_Paulo_Marques_DAndretta_(1).jpg" target="_blank" rel="noopener">Costão do Parque Estadual</a> · João D&#x27;Andretta · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Ilha_do_Campeche_e_sua_natureza_exuberante.jpg" target="_blank" rel="noopener">Ilha do Campeche</a> · Luluhgomes · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:DanielVianna_Praia_do_Campeche_Florianopolis_SC_(41528477152).jpg" target="_blank" rel="noopener">Praia do Campeche</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Barra_da_Lagoa_from_a_trail_nearby_(cropped).jpg" target="_blank" rel="noopener">Barra da Lagoa</a> · Mx. Granger · CC0</li><li><a href="https://commons.wikimedia.org/wiki/File:ViewLagoadaConceicao-feb2015.JPG" target="_blank" rel="noopener">Lagoa da Conceição</a> · Ezarate · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Quatroilhas4.jpg" target="_blank" rel="noopener">Praia de Quatro Ilhas</a> · Gohanrs · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Renato_Soares_Praia_da_Sepultura_Bombinhas_SC_(41539996032).jpg" target="_blank" rel="noopener">Bombinhas vista do alto</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:RenatoSoares_Praia_de_Bombas_Bombinhas_SC_(40251992834).jpg" target="_blank" rel="noopener">Praia de Bombas</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:ROGERIOCASSIMIRO_PRAIADOPRUMIRIM_UBATUBA_SP_(40248420274).jpg" target="_blank" rel="noopener">Praia do Prumirim</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:ROGERIOCASSIMIRO_IGREJAMATRIZ_UBATUBA_SP_(40957704871).jpg" target="_blank" rel="noopener">Igreja Matriz, no centro</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Praia_do_Itamambuca,_Brazil_(Unsplash).jpg" target="_blank" rel="noopener">Itamambuca</a> · Vanessa Bumbeers vansbumbeers · CC0</li><li><a href="https://commons.wikimedia.org/wiki/File:M._H._Mathias_Praia_Prumirim_-_Ubatuba,_SP,_Brasil_(36505158115).jpg" target="_blank" rel="noopener">Ilha do Prumirim</a> · MATHIAS, M H from Guaratinguetá, Brasil · CC BY 2.0</li><li><a href="https://commons.wikimedia.org/wiki/File:ROGERIO_CASSIMIRO_cachoeira_do_prumirim_UBATUBA_SP_(40879216014).jpg" target="_blank" rel="noopener">Mata Atlântica no Prumirim</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:View_of_Juquehy,_Brazil.jpg" target="_blank" rel="noopener">Juquehy</a> · Stefano Vigorelli · CC0</li><li><a href="https://commons.wikimedia.org/wiki/File:Praia_Camburi_-_S%C3%A3o_Sebasti%C3%A3o.jpg" target="_blank" rel="noopener">Camburi vista do alto</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:ROGERIO_CASSIMIRO_Rio_camburi_SAO_SEBASTIAO_SP.jpg" target="_blank" rel="noopener">Rio Camburi</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Igreja_de_Santa_Rita_de_C%C3%A1ssia_-_vista_da_ba%C3%ADa.jpg" target="_blank" rel="noopener">Igreja de Santa Rita, vista da baía</a> · Filipo tardim · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Centro_Hist%C3%B3rico_Paraty_7397.jpg" target="_blank" rel="noopener">Casarões do centro histórico</a> · Paul R. Burley · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Trilha_Cachada%C3%A7o_Trindade_Paraty_RJ_Vista_da_Praia.jpg" target="_blank" rel="noopener">Trindade</a> · Tomás R M de Paula · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Barcos_em_Paraty.jpg" target="_blank" rel="noopener">Barcos no cais</a> · Túllio F · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Caraguatatuba,Brasil.Praia_do_Capric%C3%B3rnio.jpg" target="_blank" rel="noopener">Praia do Capricórnio</a> · Monalisa Duarte dos Reis · CC BY-SA 3.0</li><li><a href="https://commons.wikimedia.org/wiki/File:ROGERIO_CASSIMIRO_Morro_Santo_Ant%C3%B4nio_CARAGUATATUBA_SP_(27276006428).jpg" target="_blank" rel="noopener">Morro Santo Antônio</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Praia_de_Mea%C3%ADpe_-_Guarapari.jpg" target="_blank" rel="noopener">Praia de Meaípe</a> · Túllio F · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File:MarceloMoryan_PraiadoMorro_Guarapari_ES03_(40733208525).jpg" target="_blank" rel="noopener">Praia do Morro no verão</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:BRUNO_LIMA_PISCINAS_NATURAIS_DE_PORTO_DE_GALINHAS_IPOJUCA_PE_(27037766848).jpg" target="_blank" rel="noopener">Jangada nas piscinas naturais</a> · MTur Destinos · Domínio público</li><li><a href="https://commons.wikimedia.org/wiki/File:Porto_de_Galinhas_(Vila)_-_Setembro_2015.jpg" target="_blank" rel="noopener">A vila</a> · Rosanetur from Rio de Janeiro, Brazil · CC BY 2.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Pontal_de_Maraca%C3%ADpe.jpg" target="_blank" rel="noopener">Pontal de Maracaípe</a> · Klíssia Gouveia · CC BY-SA 4.0</li></ul></details>
 </footer>
 
 </main>
+
+<div class="cal" id="cal" hidden role="dialog" aria-label="Ajustar a ilha">
+  <b>Ajustar a ilha</b>
+  <p id="cal-diag"></p>
+  <div class="seg" role="group" aria-label="Modo da ilha"><button type="button" data-mode="auto">Automático</button><button type="button" data-mode="on">Encaixar</button><button type="button" data-mode="off">Flutuante</button></div>
+  <div class="nudge"><span>Altura</span><button type="button" id="cal-up" aria-label="Subir meio ponto">↑</button><b id="cal-dy">0,0 pt</b><button type="button" id="cal-down" aria-label="Descer meio ponto">↓</button></div>
+  <p>"Encaixar" liga o modo Dynamic Island. Use as setas se a faixa preta ficar acima ou abaixo da barra de status. Fica salvo neste celular.</p>
+  <div class="cal-act"><button class="btn" type="button" id="cal-reset">Restaurar</button><button class="btn primary" type="button" id="cal-close">Pronto</button></div>
+</div>
 
 <div class="install" id="install" hidden role="note">
   <b>Abra como app</b>
@@ -733,25 +759,53 @@ html.di .lb-close{top:calc(var(--sat) + 8px)}
 
   /* ---------- modo app: encaixe na Dynamic Island física ---------- */
   const root = document.documentElement;
-  const isIOS = /iP(hone|od)/.test(navigator.userAgent);
-  const standalone = navigator.standalone === true || matchMedia('(display-mode: standalone)').matches;
-  const probe = document.createElement('div');
-  probe.style.cssText = 'position:fixed;top:0;left:0;padding-top:env(safe-area-inset-top,0px);visibility:hidden;pointer-events:none';
-  document.body.append(probe);
-  let sat = parseFloat(getComputedStyle(probe).paddingTop) || 0;
-  probe.remove();
+  const isIOS = /iP(hone|od)/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1 && screen.width < 500);
+  const mq = q => { try { return matchMedia(q).matches; } catch (e) { return false; } };
   const forced = new URLSearchParams(location.search).get('di');   /* ?di=59 simula o iPhone 16 para teste */
-  if (forced) sat = parseFloat(forced) || 59;
-  const DI = !!forced || (isIOS && standalone && sat >= 50);
-  if (DI) {
-    root.classList.add('di');
-    const big = Math.min(innerWidth, screen.width || innerWidth) > 402;      /* 17 Pro Max e outros de 430/440 pt */
-    const top = sat === 59 ? 11.33 : sat === 62 ? 14 : Math.max(8, sat - 48); /* topo da ilha física por modelo */
-    root.style.setProperty('--sat', sat + 'px');
-    root.style.setProperty('--di-top', top + 'px');
-    root.style.setProperty('--di-cw', (big ? 250 : 230) + 'px');
-    root.style.setProperty('--di-xw', (big ? 408 : 371) + 'px');
+  let DI = false, sat = 0, diag = {};
+  let diPref = store.get('feriado-di', { mode: 'auto', dy: 0 });
+  if (!diPref || typeof diPref !== 'object') diPref = { mode: 'auto', dy: 0 };
+  function measureSat() {
+    const probe = document.createElement('div');
+    probe.style.cssText = 'position:fixed;top:0;left:0;padding-top:env(safe-area-inset-top,0px);visibility:hidden;pointer-events:none';
+    document.body.append(probe);
+    const v = parseFloat(getComputedStyle(probe).paddingTop) || 0;
+    probe.remove();
+    return v;
   }
+  function isStandalone() {
+    const full = Math.abs(innerHeight - screen.height) <= 2 && Math.abs(innerWidth - screen.width) <= 2;
+    return navigator.standalone === true || mq('(display-mode: standalone)') || mq('(display-mode: fullscreen)') ||
+      (!mq('(display-mode: browser)') && full) || (isIOS && full);
+  }
+  function applyDI() {
+    sat = forced ? (parseFloat(forced) || 59) : measureSat();
+    const st = isStandalone();
+    const auto = !!forced || (isIOS && st && sat >= 50);
+    const on = diPref.mode === 'on' ? true : diPref.mode === 'off' ? false : auto;
+    const big = Math.min(innerWidth, screen.width || innerWidth) > 402;          /* 17 Pro Max e outros de 430/440 pt */
+    const satUse = sat >= 50 ? sat : (big ? 62 : 59);
+    const top = satUse === 59 ? 11.33 : satUse === 62 ? 14 : Math.max(8, satUse - 48); /* topo da ilha física por modelo */
+    const band = satUse + (+diPref.dy || 0);                                       /* ajuste fino feito no próprio celular */
+    diag = { app: st, sat, tela: screen.width + '×' + screen.height, janela: innerWidth + '×' + innerHeight, top };
+    if (on !== DI) { DI = on; root.classList.toggle('di', on); }
+    if (on) {
+      root.style.setProperty('--sat', band + 'px');
+      root.style.setProperty('--di-top', top + 'px');
+      root.style.setProperty('--di-cw', (big ? 250 : 230) + 'px');
+      root.style.setProperty('--di-xw', (big ? 408 : 371) + 'px');
+    }
+    if (typeof updateIsland === 'function' && document.getElementById('ic-right')) { try { updateIsland(); } catch (e) {} }
+    renderCal();
+  }
+  function renderCal() {
+    const c = document.getElementById('cal'); if (!c) return;
+    document.getElementById('cal-diag').textContent =
+      'Modo app: ' + (diag.app ? 'sim' : 'não') + ' · área segura: ' + Math.round(diag.sat) + ' pt · tela: ' + diag.tela + ' · janela: ' + diag.janela;
+    document.getElementById('cal-dy').textContent = ((+diPref.dy || 0) > 0 ? '+' : '') + (+diPref.dy || 0).toFixed(1).replace('.', ',') + ' pt';
+    c.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === diPref.mode ? 'true' : 'false'));
+  }
+  function setPref(p) { diPref = Object.assign({}, diPref, p); store.set('feriado-di', diPref); applyDI(); }
 
   /* vibração real: no iOS 18+ um interruptor nativo gera feedback tátil */
   let hapticLabel = null;
@@ -768,7 +822,8 @@ html.di .lb-close{top:calc(var(--sat) + 8px)}
       }
       hapticLabel.click();
     } catch (e) {}
-    if (navigator.vibrate) { try { navigator.vibrate(8); } catch (e) {} }
+    const ua = navigator.userActivation;
+    if (navigator.vibrate && (!ua || ua.isActive)) { try { navigator.vibrate(8); } catch (e) {} }
   }
 
   /* ---------- favoritos ---------- */
@@ -1003,8 +1058,31 @@ html.di .lb-close{top:calc(var(--sat) + 8px)}
 
   /* dica de instalar: só no Safari do iPhone, fora do app e fora de molduras */
   let inFrame = true; try { inFrame = window.top !== window; } catch (e) {}
-  if (isIOS && !standalone && !inFrame && !store.get('feriado-install-x', false)) $('#install').hidden = false;
+  if (isIOS && !isStandalone() && !inFrame && !store.get('feriado-install-x', false)) $('#install').hidden = false;
   $('#install-x').addEventListener('click', () => { $('#install').hidden = true; store.set('feriado-install-x', true); });
+
+  /* painel de ajuste */
+  const cal = $('#cal');
+  const openCal = () => { setOpen(false); cal.hidden = false; renderCal(); haptic(); };
+  $('#ix-cal').addEventListener('click', e => { e.stopPropagation(); openCal(); });
+  $('#foot-cal').addEventListener('click', openCal);
+  cal.addEventListener('click', e => {
+    e.stopPropagation();
+    const m = e.target.closest('[data-mode]'); if (m) { setPref({ mode: m.dataset.mode }); haptic(); }
+  });
+  $('#cal-up').addEventListener('click', () => { setPref({ dy: Math.max(-12, (+diPref.dy || 0) - .5) }); haptic(); });
+  $('#cal-down').addEventListener('click', () => { setPref({ dy: Math.min(12, (+diPref.dy || 0) + .5) }); haptic(); });
+  $('#cal-reset').addEventListener('click', () => { setPref({ mode: 'auto', dy: 0 }); haptic(); });
+  $('#cal-close').addEventListener('click', () => { cal.hidden = true; });
+
+  /* o iOS pode informar a área segura só depois de abrir: mede de novo algumas vezes */
+  applyDI();
+  requestAnimationFrame(applyDI);
+  [250, 800, 2000].forEach(t => setTimeout(applyDI, t));
+  addEventListener('resize', applyDI);
+  addEventListener('orientationchange', () => setTimeout(applyDI, 300));
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) applyDI(); });
+  addEventListener('pageshow', applyDI);
 
   setOpen(false); renderFavs(); tick(); frame();
   setInterval(tick, 1000);
