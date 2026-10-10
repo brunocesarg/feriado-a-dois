@@ -87,8 +87,6 @@ def avaliar(rid, rota, atual, antes):
         motivos.append("menor preço já visto")
     if atual.get("nivel") == "low" and antes.get("nivel") != "low" and not rota.get("radar"):
         motivos.append("o Google marca como preço baixo")
-    if total <= TETO < rota["total"]:
-        motivos.append("agora a viagem cabe nos R$ 6 mil")
     if not motivos:
         return None, total
     if ultimo_alerta is not None and p > ultimo_alerta - REALERTA_RS:
