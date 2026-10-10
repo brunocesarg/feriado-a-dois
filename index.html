@@ -100,6 +100,9 @@ button{font:inherit;color:inherit;cursor:pointer}
    Ao trocar de destino ela expande para 371 / 408 de largura (Live Activity), com o conteúdo abaixo da câmera.
    No modo app a página rola dentro de .app, e não no documento, para o iOS não embaçar o topo. */
 .sb-scrim{display:none}
+/* Barra de status preta: o iOS 26 só deixa de aplicar o desfoque no topo quando uma caixa fixa,
+   de largura total e cor sólida, cobre a borda de cima. A ilha física fica dentro do preto. */
+html.di .sb-scrim{display:block;position:fixed;z-index:55;top:0;left:0;right:0;height:54px;background:#000}
 html.di,html.di body{height:100%;overflow:hidden}
 html.di .app{position:fixed;inset:0;margin:0 auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none}
 html.di.lock .app{overflow:hidden}
