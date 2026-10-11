@@ -1,0 +1,88 @@
+{
+ "jogos": {
+  "gta6": {
+   "nome": "GTA 6",
+   "alvo": 330,
+   "preco": 404.91,
+   "loja": "Fast Shop",
+   "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
+   "min": 404.91,
+   "max": 404.91,
+   "ultimo_alerta": null,
+   "aviso": null,
+   "ofertas": [
+    {
+     "loja": "Fast Shop",
+     "preco": 404.91,
+     "nome": "Jogo Grand Theft Auto VI (GTA 6) PS5 Rockstar",
+     "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
+     "lojas": 3
+    }
+   ],
+   "historico": [
+    [
+     "2026-10-10T22:30-03:00",
+     404.91,
+     "Fast Shop"
+    ]
+   ]
+  },
+  "fc27": {
+   "nome": "EA Sports FC 27",
+   "alvo": 250,
+   "preco": 341.91,
+   "loja": "Magazine Luiza",
+   "url": "https://www.buscape.com.br/lead?oid=1578818162",
+   "min": 341.91,
+   "max": 341.91,
+   "ultimo_alerta": null,
+   "aviso": null,
+   "ofertas": [
+    {
+     "loja": "Magazine Luiza",
+     "preco": 341.91,
+     "nome": "EA Sports FC 27 para PS5 Pré-venda, PS5",
+     "url": "https://www.buscape.com.br/lead?oid=1578818162",
+     "lojas": 1
+    },
+    {
+     "loja": "Fast Shop",
+     "preco": 341.91,
+     "nome": "Jogo PS5 EA Sports FC 27 Edição Standard - Sony",
+     "url": "https://www.buscape.com.br/lead?oid=1578619476",
+     "lojas": 1
+    },
+    {
+     "loja": "Amazon",
+     "preco": 365,
+     "nome": "EA Sports FC 27 - PlayStation 5",
+     "url": "https://www.buscape.com.br/lead?oid=1579158548",
+     "lojas": 1
+    },
+    {
+     "loja": "Magazine Luiza",
+     "preco": 373.7,
+     "nome": "Jogo PS5 EA Sports FC 27, ELECTRONIC ARTS",
+     "url": "https://www.buscape.com.br/lead?oid=1580470959",
+     "lojas": 1
+    },
+    {
+     "loja": "Amazon",
+     "preco": 379.9,
+     "nome": "EA Sports FC 27 - PlayStation 4",
+     "url": "https://www.buscape.com.br/lead?oid=1580163711",
+     "lojas": 1
+    }
+   ],
+   "historico": [
+    [
+     "2026-10-10T22:30-03:00",
+     341.91,
+     "Magazine Luiza"
+    ]
+   ]
+  }
+ },
+ "atualizado": "2026-10-10T22:30-03:00",
+ "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
+}

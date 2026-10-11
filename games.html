@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0d12">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Radar de Jogos</title>
+<style>
+:root{--bg:#0b0d12;--card:#151924;--line:#232a39;--tx:#eef1f7;--mu:#8b93a7;--ok:#3ddc97;--warn:#ffb547;--ac:#5b8cff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
+ padding:calc(env(safe-area-inset-top) + 20px) 16px calc(env(safe-area-inset-bottom) + 32px)}
+h1{font-size:30px;margin:6px 0 2px;letter-spacing:-.02em}
+.sub{color:var(--mu);font-size:14px;margin-bottom:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin-bottom:16px}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.nm{font-size:20px;font-weight:700}
+.pr{font-size:34px;font-weight:800;letter-spacing:-.02em;margin:8px 0 2px}
+.st{font-size:14px;color:var(--mu)}
+.pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;background:#232a39;color:var(--mu);white-space:nowrap}
+.pill.ok{background:rgba(61,220,151,.15);color:var(--ok)}
+.bar{height:8px;border-radius:9px;background:#232a39;margin:14px 0 6px;position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--ac),var(--ok));border-radius:9px}
+.stats{display:flex;justify-content:space-between;font-size:13px;color:var(--mu)}
+svg{width:100%;height:70px;margin-top:12px;display:block}
+.of{margin-top:12px;border-top:1px solid var(--line)}
+.of a{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);color:var(--tx);text-decoration:none;font-size:15px}
+.of a span:last-child{font-weight:700;white-space:nowrap}
+.aviso{margin-top:10px;font-size:14px;color:var(--warn)}
+.foot{color:var(--mu);font-size:13px;text-align:center;margin-top:20px}
+a.back{color:var(--ac);text-decoration:none;font-size:15px}
+</style>
+</head>
+<body>
+<a class="back" href="./">‹ Feriado a Dois</a>
+<h1>Radar de Jogos</h1>
+<div class="sub" id="sub">Carregando preços…</div>
+<div id="list"></div>
+<div class="foot">Conferido a cada 3 horas em lojas confiáveis (PS5, mídia física).<br>Quando baixar, o aviso chega no iPhone pelo app.</div>
+<script>
+const brl=v=>'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function spark(h){
+  if(h.length<2)return '<div class="st" style="margin-top:12px">O gráfico aparece quando houver mais de uma leitura.</div>';
+  const ps=h.map(x=>x[1]),lo=Math.min(...ps),hi=Math.max(...ps),r=hi-lo||1,W=300,H=60;
+  const pts=ps.map((p,i)=>`${(i/(ps.length-1)*W).toFixed(1)},${(H-(p-lo)/r*(H-8)-4).toFixed(1)}`).join(' ');
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="#5b8cff" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>`;
+}
+fetch('data/games.json?'+Date.now()).then(r=>r.json()).then(d=>{
+  const t=new Date(d.atualizado);
+  document.getElementById('sub').textContent='Atualizado '+t.toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('list').innerHTML=Object.entries(d.jogos).map(([id,j])=>{
+    const ok=j.preco<=j.alvo, falta=j.preco-j.alvo;
+    const pct=Math.max(4,Math.min(100,j.alvo/j.preco*100));
+    return `<div class="card" id="${id}">
+      <div class="top"><div class="nm">${esc(j.nome)}</div><span class="pill ${ok?'ok':''}">${ok?'No alvo!':'Faltam '+brl(falta)}</span></div>
+      <div class="pr">${brl(j.preco)}</div>
+      <div class="st">Menor preço agora · ${esc(j.loja)}</div>
+      <div class="bar"><i style="width:${pct}%"></i></div>
+      <div class="stats"><span>Alvo ${brl(j.alvo)}</span><span>Mínimo visto ${brl(j.min)}</span></div>
+      ${spark(j.historico||[])}
+      ${j.aviso?`<div class="aviso">Último aviso: ${esc(j.aviso)}</div>`:''}
+      <div class="of">${(j.ofertas||[]).map(o=>`<a href="${esc(o.url)}" target="_blank" rel="noopener"><span>${esc(o.loja)}${o.lojas>1?` <small style="color:var(--mu)">+${o.lojas-1} lojas</small>`:''}</span><span>${brl(o.preco)}</span></a>`).join('')}</div>
+    </div>`}).join('');
+}).catch(()=>{document.getElementById('sub').textContent='Não consegui carregar os preços agora.'});
+</script>
+</body>
+</html>
