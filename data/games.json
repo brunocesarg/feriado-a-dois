@@ -24,6 +24,11 @@
      "2026-10-10T22:30-03:00",
      404.91,
      "Fast Shop"
+    ],
+    [
+     "2026-10-11T00:31-03:00",
+     404.91,
+     "Fast Shop"
     ]
    ]
   },
@@ -79,10 +84,15 @@
      "2026-10-10T22:30-03:00",
      341.91,
      "Magazine Luiza"
+    ],
+    [
+     "2026-10-11T00:31-03:00",
+     341.91,
+     "Magazine Luiza"
     ]
    ]
   }
  },
- "atualizado": "2026-10-10T22:32-03:00",
+ "atualizado": "2026-10-11T00:31-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
