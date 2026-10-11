@@ -123,10 +123,12 @@ def notificar(avisos, teste=False):
         for sub in inscricoes:
             try:
                 webpush(subscription_info=sub, data=json.dumps(aviso, ensure_ascii=False),
-                        vapid_private_key=chave, vapid_claims={"sub": SITE}, ttl=86400)
+                        vapid_private_key=chave, vapid_claims={"sub": "mailto:brunocesarg@users.noreply.github.com"}, ttl=86400)
                 enviados += 1
             except WebPushException as e:
                 print("Falha ao enviar para um celular:", getattr(e.response, "status_code", ""), str(e)[:200])
+            except Exception as e:  # um erro de envio não derruba a atualização de preços
+                print("Erro ao enviar notificação:", str(e)[:200])
     print(f"Notificações enviadas: {enviados}")
     return enviados
 
