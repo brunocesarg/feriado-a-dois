@@ -84,6 +84,11 @@
      "2026-10-22T01:46-03:00",
      404.91,
      "Fast Shop"
+    ],
+    [
+     "2026-10-23T01:50-03:00",
+     404.91,
+     "Fast Shop"
     ]
    ]
   },
@@ -114,7 +119,7 @@
     },
     {
      "loja": "Amazon",
-     "preco": 365,
+     "preco": 364.97,
      "nome": "EA Sports FC 27 - PlayStation 5",
      "url": "https://www.buscape.com.br/lead?oid=1579158548",
      "lojas": 1
@@ -199,10 +204,15 @@
      "2026-10-22T01:46-03:00",
      341.91,
      "Magazine Luiza"
+    ],
+    [
+     "2026-10-23T01:50-03:00",
+     341.91,
+     "Magazine Luiza"
     ]
    ]
   }
  },
- "atualizado": "2026-10-22T18:36-03:00",
+ "atualizado": "2026-10-23T01:50-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
