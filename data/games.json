@@ -109,6 +109,11 @@
      "2026-10-27T06:00-03:00",
      404.91,
      "Fast Shop"
+    ],
+    [
+     "2026-10-28T02:43-03:00",
+     404.91,
+     "Fast Shop"
     ]
    ]
   },
@@ -128,13 +133,6 @@
      "preco": 341.91,
      "nome": "EA Sports FC 27 para PS5 Pré-venda, PS5",
      "url": "https://www.buscape.com.br/lead?oid=1578818162",
-     "lojas": 1
-    },
-    {
-     "loja": "Fast Shop",
-     "preco": 341.91,
-     "nome": "Jogo PS5 EA Sports FC 27 Edição Standard - Sony",
-     "url": "https://www.buscape.com.br/lead?oid=1578619476",
      "lojas": 1
     },
     {
@@ -249,10 +247,15 @@
      "2026-10-27T06:00-03:00",
      341.91,
      "Magazine Luiza"
+    ],
+    [
+     "2026-10-28T02:43-03:00",
+     341.91,
+     "Magazine Luiza"
     ]
    ]
   }
  },
- "atualizado": "2026-10-27T19:14-03:00",
+ "atualizado": "2026-10-28T02:43-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
