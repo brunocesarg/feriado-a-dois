@@ -192,6 +192,13 @@
      "nome": "Jogo PS5 EA Sports FC 27 Edição Standard - Sony",
      "url": "https://www.buscape.com.br/lead?oid=1578619476",
      "lojas": 1
+    },
+    {
+     "loja": "Americanas",
+     "preco": 379.99,
+     "nome": "Jogo EA Sports FC 27 PS5 Mídia Física",
+     "url": "https://www.buscape.com.br/lead?oid=1580399313",
+     "lojas": 1
     }
    ],
    "historico": [
@@ -328,6 +335,6 @@
    ]
   }
  },
- "atualizado": "2026-11-03T14:03-03:00",
+ "atualizado": "2026-11-03T20:23-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
