@@ -171,6 +171,13 @@
      "lojas": 1
     },
     {
+     "loja": "Fast Shop",
+     "preco": 341.91,
+     "nome": "Jogo PS5 EA Sports FC 27 Edição Standard - Sony",
+     "url": "https://www.buscape.com.br/lead?oid=1578619476",
+     "lojas": 1
+    },
+    {
      "loja": "Amazon",
      "preco": 349.9,
      "nome": "EA Sports FC 27 - PlayStation 5",
@@ -192,10 +199,10 @@
      "lojas": 1
     },
     {
-     "loja": "Fast Shop",
-     "preco": 379.9,
-     "nome": "Jogo PS5 EA Sports FC 27 Edição Standard - Sony",
-     "url": "https://www.buscape.com.br/lead?oid=1578619476",
+     "loja": "Magazine Luiza",
+     "preco": 379,
+     "nome": "Jogo EA Sports FC 27, PS5 - P5DA10000065FGM - Eletronic Arts",
+     "url": "https://www.buscape.com.br/lead?oid=1582283542",
      "lojas": 1
     },
     {
@@ -345,6 +352,6 @@
    ]
   }
  },
- "atualizado": "2026-11-04T14:15-03:00",
+ "atualizado": "2026-11-04T20:39-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
