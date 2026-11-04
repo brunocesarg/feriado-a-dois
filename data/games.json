@@ -144,32 +144,37 @@
      "2026-11-03T03:47-03:00",
      404.91,
      "Fast Shop"
+    ],
+    [
+     "2026-11-04T03:22-03:00",
+     404.91,
+     "Fast Shop"
     ]
    ]
   },
   "fc27": {
    "nome": "EA Sports FC 27",
    "alvo": 250,
-   "preco": 332,
-   "loja": "Amazon",
-   "url": "https://www.buscape.com.br/lead?oid=1579158548",
+   "preco": 341.91,
+   "loja": "Magazine Luiza",
+   "url": "https://www.buscape.com.br/lead?oid=1578818162",
    "min": 332,
    "max": 341.91,
    "ultimo_alerta": null,
    "aviso": null,
    "ofertas": [
     {
-     "loja": "Amazon",
-     "preco": 332,
-     "nome": "EA Sports FC 27 - PlayStation 5",
-     "url": "https://www.buscape.com.br/lead?oid=1579158548",
-     "lojas": 1
-    },
-    {
      "loja": "Magazine Luiza",
      "preco": 341.91,
      "nome": "EA Sports FC 27 para PS5 Pré-venda, PS5",
      "url": "https://www.buscape.com.br/lead?oid=1578818162",
+     "lojas": 1
+    },
+    {
+     "loja": "Amazon",
+     "preco": 349.9,
+     "nome": "EA Sports FC 27 - PlayStation 5",
+     "url": "https://www.buscape.com.br/lead?oid=1579158548",
      "lojas": 1
     },
     {
@@ -331,10 +336,15 @@
      "2026-11-03T03:47-03:00",
      332,
      "Amazon"
+    ],
+    [
+     "2026-11-04T03:22-03:00",
+     341.91,
+     "Magazine Luiza"
     ]
    ]
   }
  },
- "atualizado": "2026-11-03T20:23-03:00",
+ "atualizado": "2026-11-04T03:22-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
