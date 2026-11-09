@@ -217,6 +217,13 @@
      "lojas": 1
     },
     {
+     "loja": "Magazine Luiza",
+     "preco": 356.26,
+     "nome": "Jogo EA Sports FC 27, PS5 - P5DA10000065FGM - Eletronic Arts",
+     "url": "https://www.buscape.com.br/lead?oid=1582283542",
+     "lojas": 1
+    },
+    {
      "loja": "Amazon",
      "preco": 369.9,
      "nome": "EA Sports FC 27 - PlayStation 4",
@@ -224,24 +231,17 @@
      "lojas": 1
     },
     {
-     "loja": "Magazine Luiza",
-     "preco": 372.64,
-     "nome": "Jogo PS5 EA Sports FC 27, ELECTRONIC ARTS",
-     "url": "https://www.buscape.com.br/lead?oid=1580470959",
-     "lojas": 1
-    },
-    {
-     "loja": "Magazine Luiza",
-     "preco": 379,
-     "nome": "Jogo EA Sports FC 27, PS5 - P5DA10000065FGM - Eletronic Arts",
-     "url": "https://www.buscape.com.br/lead?oid=1582283542",
-     "lojas": 1
-    },
-    {
      "loja": "Americanas",
      "preco": 379.99,
      "nome": "Jogo EA Sports FC 27 PS5 Mídia Física",
      "url": "https://www.buscape.com.br/lead?oid=1580399313",
+     "lojas": 1
+    },
+    {
+     "loja": "Magazine Luiza",
+     "preco": 382.19,
+     "nome": "Jogo PS5 EA Sports FC 27, ELECTRONIC ARTS",
+     "url": "https://www.buscape.com.br/lead?oid=1580470959",
      "lojas": 1
     }
    ],
@@ -409,6 +409,6 @@
    ]
   }
  },
- "atualizado": "2026-11-09T03:29-03:00",
+ "atualizado": "2026-11-09T16:49-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
