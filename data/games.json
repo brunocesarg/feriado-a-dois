@@ -3,17 +3,17 @@
   "gta6": {
    "nome": "GTA 6",
    "alvo": 330,
-   "preco": 404.91,
+   "preco": 400.41,
    "loja": "Fast Shop",
    "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
-   "min": 404.91,
+   "min": 400.41,
    "max": 404.91,
    "ultimo_alerta": null,
    "aviso": null,
    "ofertas": [
     {
      "loja": "Fast Shop",
-     "preco": 404.91,
+     "preco": 400.41,
      "nome": "Jogo Grand Theft Auto VI (GTA 6) PS5 Rockstar",
      "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
      "lojas": 3
@@ -179,39 +179,37 @@
      "2026-11-10T00:34-03:00",
      404.91,
      "Fast Shop"
+    ],
+    [
+     "2026-11-10T18:18-03:00",
+     400.41,
+     "Fast Shop"
     ]
    ]
   },
   "fc27": {
    "nome": "EA Sports FC 27",
    "alvo": 250,
-   "preco": 328.58,
-   "loja": "Amazon",
-   "url": "https://www.buscape.com.br/lead?oid=1579158548",
-   "min": 328.58,
+   "preco": 296.91,
+   "loja": "Magazine Luiza",
+   "url": "https://www.buscape.com.br/lead?oid=1578818162",
+   "min": 296.91,
    "max": 341.91,
-   "ultimo_alerta": null,
-   "aviso": null,
+   "ultimo_alerta": 296.91,
+   "aviso": "R$ 297 na Magazine Luiza. Menor preço já visto (antes R$ 329).",
    "ofertas": [
+    {
+     "loja": "Magazine Luiza",
+     "preco": 296.91,
+     "nome": "EA Sports FC 27 para PS5, PS5",
+     "url": "https://www.buscape.com.br/lead?oid=1578818162",
+     "lojas": 1
+    },
     {
      "loja": "Amazon",
      "preco": 328.58,
      "nome": "EA Sports FC 27 - PlayStation 5",
      "url": "https://www.buscape.com.br/lead?oid=1579158548",
-     "lojas": 1
-    },
-    {
-     "loja": "Magazine Luiza",
-     "preco": 341.91,
-     "nome": "EA Sports FC 27 para PS5 Pré-venda, PS5",
-     "url": "https://www.buscape.com.br/lead?oid=1578818162",
-     "lojas": 1
-    },
-    {
-     "loja": "Fast Shop",
-     "preco": 341.91,
-     "nome": "Jogo PS5 EA Sports FC 27 Edição Standard - Sony",
-     "url": "https://www.buscape.com.br/lead?oid=1578619476",
      "lojas": 1
     },
     {
@@ -222,17 +220,17 @@
      "lojas": 1
     },
     {
-     "loja": "Magazine Luiza",
-     "preco": 356.26,
-     "nome": "Jogo EA Sports FC 27, PS5 - P5DA10000065FGM - Eletronic Arts",
-     "url": "https://www.buscape.com.br/lead?oid=1582283542",
+     "loja": "Amazon",
+     "preco": 379,
+     "nome": "EA Sports FC 27 - PlayStation 4",
+     "url": "https://www.buscape.com.br/lead?oid=1580163711",
      "lojas": 1
     },
     {
-     "loja": "Amazon",
-     "preco": 369.9,
-     "nome": "EA Sports FC 27 - PlayStation 4",
-     "url": "https://www.buscape.com.br/lead?oid=1580163711",
+     "loja": "Fast Shop",
+     "preco": 379.9,
+     "nome": "Jogo PS5 EA Sports FC 27 Edição Standard - Sony",
+     "url": "https://www.buscape.com.br/lead?oid=1578619476",
      "lojas": 1
     },
     {
@@ -415,10 +413,15 @@
      "2026-11-10T00:34-03:00",
      328.58,
      "Amazon"
+    ],
+    [
+     "2026-11-10T18:18-03:00",
+     296.91,
+     "Magazine Luiza"
     ]
    ]
   }
  },
- "atualizado": "2026-11-10T11:53-03:00",
+ "atualizado": "2026-11-10T18:18-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
