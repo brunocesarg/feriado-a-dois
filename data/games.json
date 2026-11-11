@@ -3,17 +3,17 @@
   "gta6": {
    "nome": "GTA 6",
    "alvo": 330,
-   "preco": 400.41,
-   "loja": "Fast Shop",
+   "preco": 418.41,
+   "loja": "KaBuM!",
    "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
    "min": 400.41,
-   "max": 404.91,
+   "max": 418.41,
    "ultimo_alerta": null,
    "aviso": null,
    "ofertas": [
     {
-     "loja": "Fast Shop",
-     "preco": 400.41,
+     "loja": "KaBuM!",
+     "preco": 418.41,
      "nome": "Jogo Grand Theft Auto VI (GTA 6) PS5 Rockstar",
      "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
      "lojas": 3
@@ -189,6 +189,11 @@
      "2026-11-11T03:20-03:00",
      400.41,
      "Fast Shop"
+    ],
+    [
+     "2026-11-11T14:08-03:00",
+     418.41,
+     "KaBuM!"
     ]
    ]
   },
@@ -232,6 +237,13 @@
      "lojas": 1
     },
     {
+     "loja": "Americanas",
+     "preco": 368.59,
+     "nome": "Jogo EA Sports FC 27 PS5",
+     "url": "https://www.buscape.com.br/lead?oid=1580399313",
+     "lojas": 1
+    },
+    {
      "loja": "Amazon",
      "preco": 379,
      "nome": "EA Sports FC 27 - PlayStation 4",
@@ -243,13 +255,6 @@
      "preco": 379.9,
      "nome": "Jogo PS5 EA Sports FC 27 Edição Standard - Sony",
      "url": "https://www.buscape.com.br/lead?oid=1578619476",
-     "lojas": 1
-    },
-    {
-     "loja": "Americanas",
-     "preco": 379.99,
-     "nome": "Jogo EA Sports FC 27 PS5 Mídia Física",
-     "url": "https://www.buscape.com.br/lead?oid=1580399313",
      "lojas": 1
     }
    ],
@@ -432,6 +437,6 @@
    ]
   }
  },
- "atualizado": "2026-11-11T03:20-03:00",
+ "atualizado": "2026-11-11T14:08-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
