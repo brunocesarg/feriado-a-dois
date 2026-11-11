@@ -184,6 +184,11 @@
      "2026-11-10T18:18-03:00",
      400.41,
      "Fast Shop"
+    ],
+    [
+     "2026-11-11T03:20-03:00",
+     400.41,
+     "Fast Shop"
     ]
    ]
   },
@@ -220,6 +225,13 @@
      "lojas": 1
     },
     {
+     "loja": "Magazine Luiza",
+     "preco": 360.96,
+     "nome": "Jogo PS5 EA Sports FC 27, ELECTRONIC ARTS",
+     "url": "https://www.buscape.com.br/lead?oid=1580470959",
+     "lojas": 1
+    },
+    {
      "loja": "Amazon",
      "preco": 379,
      "nome": "EA Sports FC 27 - PlayStation 4",
@@ -238,13 +250,6 @@
      "preco": 379.99,
      "nome": "Jogo EA Sports FC 27 PS5 Mídia Física",
      "url": "https://www.buscape.com.br/lead?oid=1580399313",
-     "lojas": 1
-    },
-    {
-     "loja": "Magazine Luiza",
-     "preco": 382.19,
-     "nome": "Jogo PS5 EA Sports FC 27, ELECTRONIC ARTS",
-     "url": "https://www.buscape.com.br/lead?oid=1580470959",
      "lojas": 1
     }
    ],
@@ -418,10 +423,15 @@
      "2026-11-10T18:18-03:00",
      296.91,
      "Magazine Luiza"
+    ],
+    [
+     "2026-11-11T03:20-03:00",
+     296.91,
+     "Magazine Luiza"
     ]
    ]
   }
  },
- "atualizado": "2026-11-10T18:18-03:00",
+ "atualizado": "2026-11-11T03:20-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
