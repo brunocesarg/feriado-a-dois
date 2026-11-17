@@ -16,7 +16,7 @@
      "preco": 418.41,
      "nome": "Jogo Grand Theft Auto VI (GTA 6) PS5 Rockstar",
      "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
-     "lojas": 3
+     "lojas": 2
     }
    ],
    "historico": [
@@ -276,13 +276,6 @@
     },
     {
      "loja": "Magazine Luiza",
-     "preco": 348.33,
-     "nome": "Jogo PS5 EA Sports FC 27, ELECTRONIC ARTS",
-     "url": "https://www.buscape.com.br/lead?oid=1580470959",
-     "lojas": 1
-    },
-    {
-     "loja": "Magazine Luiza",
      "preco": 354.24,
      "nome": "Jogo EA Sports FC 27 PlayStation 5 Sony",
      "url": "https://www.buscape.com.br/lead?oid=1582344839",
@@ -293,6 +286,13 @@
      "preco": 368.59,
      "nome": "Jogo EA Sports FC 27 PS5",
      "url": "https://www.buscape.com.br/lead?oid=1580399313",
+     "lojas": 1
+    },
+    {
+     "loja": "Magazine Luiza",
+     "preco": 368.82,
+     "nome": "Jogo PS5 EA Sports FC 27, ELECTRONIC ARTS",
+     "url": "https://www.buscape.com.br/lead?oid=1580470959",
      "lojas": 1
     },
     {
@@ -512,6 +512,6 @@
    ]
   }
  },
- "atualizado": "2026-11-17T00:54-03:00",
+ "atualizado": "2026-11-17T13:00-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
