@@ -16,7 +16,7 @@
      "preco": 400.41,
      "nome": "Jogo Grand Theft Auto VI (GTA 6) PS5 Rockstar",
      "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
-     "lojas": 4
+     "lojas": 5
     }
    ],
    "historico": [
@@ -254,20 +254,32 @@
      "2026-11-18T17:31-03:00",
      400.41,
      "Fast Shop"
+    ],
+    [
+     "2026-11-19T08:39-03:00",
+     400.41,
+     "Fast Shop"
     ]
    ]
   },
   "fc27": {
    "nome": "EA Sports FC 27",
    "alvo": 250,
-   "preco": 296.91,
-   "loja": "Magazine Luiza",
-   "url": "https://www.buscape.com.br/lead?oid=1578818162",
-   "min": 296.91,
+   "preco": 290.99,
+   "loja": "Americanas",
+   "url": "https://www.buscape.com.br/lead?oid=1580399313",
+   "min": 290.99,
    "max": 341.91,
    "ultimo_alerta": 296.91,
    "aviso": "R$ 297 na Magazine Luiza. Menor preço já visto (antes R$ 329).",
    "ofertas": [
+    {
+     "loja": "Americanas",
+     "preco": 290.99,
+     "nome": "Jogo EA Sports FC 27 PS5",
+     "url": "https://www.buscape.com.br/lead?oid=1580399313",
+     "lojas": 1
+    },
     {
      "loja": "Magazine Luiza",
      "preco": 296.91,
@@ -297,10 +309,10 @@
      "lojas": 1
     },
     {
-     "loja": "Americanas",
-     "preco": 368.59,
-     "nome": "Jogo EA Sports FC 27 PS5",
-     "url": "https://www.buscape.com.br/lead?oid=1580399313",
+     "loja": "Magazine Luiza",
+     "preco": 360.96,
+     "nome": "Jogo PS5 EA Sports FC 27, ELECTRONIC ARTS",
+     "url": "https://www.buscape.com.br/lead?oid=1580470959",
      "lojas": 1
     },
     {
@@ -308,13 +320,6 @@
      "preco": 379.9,
      "nome": "Jogo PS5 EA Sports FC 27 Edição Standard - Sony",
      "url": "https://www.buscape.com.br/lead?oid=1578619476",
-     "lojas": 1
-    },
-    {
-     "loja": "Magazine Luiza",
-     "preco": 382.19,
-     "nome": "Jogo PS5 EA Sports FC 27, ELECTRONIC ARTS",
-     "url": "https://www.buscape.com.br/lead?oid=1580470959",
      "lojas": 1
     }
    ],
@@ -528,10 +533,15 @@
      "2026-11-18T08:42-03:00",
      296.91,
      "Magazine Luiza"
+    ],
+    [
+     "2026-11-19T08:39-03:00",
+     290.99,
+     "Americanas"
     ]
    ]
   }
  },
- "atualizado": "2026-11-18T23:34-03:00",
+ "atualizado": "2026-11-19T08:39-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
