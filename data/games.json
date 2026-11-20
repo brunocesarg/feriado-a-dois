@@ -3,8 +3,8 @@
   "gta6": {
    "nome": "GTA 6",
    "alvo": 330,
-   "preco": 426.55,
-   "loja": "Americanas",
+   "preco": 418.41,
+   "loja": "KaBuM!",
    "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
    "min": 400.41,
    "max": 426.55,
@@ -12,11 +12,11 @@
    "aviso": null,
    "ofertas": [
     {
-     "loja": "Americanas",
-     "preco": 426.55,
+     "loja": "KaBuM!",
+     "preco": 418.41,
      "nome": "Jogo Grand Theft Auto VI (GTA 6) PS5 Rockstar",
      "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
-     "lojas": 3
+     "lojas": 4
     }
    ],
    "historico": [
@@ -269,6 +269,11 @@
      "2026-11-19T23:19-03:00",
      426.55,
      "Americanas"
+    ],
+    [
+     "2026-11-20T08:40-03:00",
+     418.41,
+     "KaBuM!"
     ]
    ]
   },
@@ -548,10 +553,15 @@
      "2026-11-19T08:39-03:00",
      290.99,
      "Americanas"
+    ],
+    [
+     "2026-11-20T08:40-03:00",
+     290.99,
+     "Americanas"
     ]
    ]
   }
  },
- "atualizado": "2026-11-19T23:19-03:00",
+ "atualizado": "2026-11-20T08:40-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
