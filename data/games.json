@@ -280,26 +280,26 @@
   "fc27": {
    "nome": "EA Sports FC 27",
    "alvo": 250,
-   "preco": 290.99,
-   "loja": "Americanas",
-   "url": "https://www.buscape.com.br/lead?oid=1580399313",
-   "min": 290.99,
+   "preco": 260.1,
+   "loja": "Magazine Luiza",
+   "url": "https://www.buscape.com.br/lead?oid=1578818162",
+   "min": 260.1,
    "max": 341.91,
-   "ultimo_alerta": 296.91,
-   "aviso": "R$ 297 na Magazine Luiza. Menor preço já visto (antes R$ 329).",
+   "ultimo_alerta": 260.1,
+   "aviso": "R$ 260 na Magazine Luiza. Menor preço já visto (antes R$ 291).",
    "ofertas": [
+    {
+     "loja": "Magazine Luiza",
+     "preco": 260.1,
+     "nome": "EA Sports FC 27 para PS5, PS5",
+     "url": "https://www.buscape.com.br/lead?oid=1578818162",
+     "lojas": 1
+    },
     {
      "loja": "Americanas",
      "preco": 290.99,
      "nome": "Jogo EA Sports FC 27 PS5",
      "url": "https://www.buscape.com.br/lead?oid=1580399313",
-     "lojas": 1
-    },
-    {
-     "loja": "Magazine Luiza",
-     "preco": 296.91,
-     "nome": "EA Sports FC 27 para PS5, PS5",
-     "url": "https://www.buscape.com.br/lead?oid=1578818162",
      "lojas": 1
     },
     {
@@ -558,10 +558,15 @@
      "2026-11-20T08:40-03:00",
      290.99,
      "Americanas"
+    ],
+    [
+     "2026-11-20T23:15-03:00",
+     260.1,
+     "Magazine Luiza"
     ]
    ]
   }
  },
- "atualizado": "2026-11-20T17:19-03:00",
+ "atualizado": "2026-11-20T23:15-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
