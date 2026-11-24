@@ -17,6 +17,13 @@
      "nome": "Jogo Grand Theft Auto VI (GTA 6) PS5 Rockstar",
      "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
      "lojas": 4
+    },
+    {
+     "loja": "Magazine Luiza",
+     "preco": 455.29,
+     "nome": "Jogo Grand Theft Auto GTA VI, PS5 - TT000272PS5 - Playstation",
+     "url": "https://www.buscape.com.br/lead?oid=1582917111",
+     "lojas": 1
     }
    ],
    "historico": [
@@ -337,6 +344,13 @@
      "lojas": 1
     },
     {
+     "loja": "Fast Shop",
+     "preco": 338.11,
+     "nome": "Jogo PS5 EA Sports FC 27 Edição Standard - Sony",
+     "url": "https://www.buscape.com.br/lead?oid=1578619476",
+     "lojas": 1
+    },
+    {
      "loja": "Magazine Luiza",
      "preco": 354.24,
      "nome": "Jogo EA Sports FC 27 PlayStation 5 Sony",
@@ -348,13 +362,6 @@
      "preco": 360.96,
      "nome": "Jogo PS5 EA Sports FC 27, ELECTRONIC ARTS",
      "url": "https://www.buscape.com.br/lead?oid=1580470959",
-     "lojas": 1
-    },
-    {
-     "loja": "Fast Shop",
-     "preco": 379.9,
-     "nome": "Jogo PS5 EA Sports FC 27 Edição Standard - Sony",
-     "url": "https://www.buscape.com.br/lead?oid=1578619476",
      "lojas": 1
     }
    ],
@@ -607,6 +614,6 @@
    ]
   }
  },
- "atualizado": "2026-11-24T10:43-03:00",
+ "atualizado": "2026-11-24T20:53-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
