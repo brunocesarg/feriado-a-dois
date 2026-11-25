@@ -21,8 +21,15 @@
     {
      "loja": "Magazine Luiza",
      "preco": 455.29,
-     "nome": "Jogo Grand Theft Auto GTA VI, PS5 - TT000272PS5 - Playstation",
+     "nome": "Jogo Grand Theft Auto GTA VI, PS5 - TT000272PS5 - Playstation, PS5",
      "url": "https://www.buscape.com.br/lead?oid=1582917111",
+     "lojas": 1
+    },
+    {
+     "loja": "Magazine Luiza",
+     "preco": 470.36,
+     "nome": "Jogo Grand Theft Auto GTA VI PlayStation 5, ROCKSTAR GAMES, PS5",
+     "url": "https://www.buscape.com.br/lead?oid=1582945628",
      "lojas": 1
     }
    ],
@@ -624,6 +631,6 @@
    ]
   }
  },
- "atualizado": "2026-11-25T05:34-03:00",
+ "atualizado": "2026-11-25T16:15-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
