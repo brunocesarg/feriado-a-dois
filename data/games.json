@@ -313,6 +313,11 @@
      "2026-11-25T05:34-03:00",
      418.41,
      "KaBuM!"
+    ],
+    [
+     "2026-11-26T00:34-03:00",
+     418.41,
+     "KaBuM!"
     ]
    ]
   },
@@ -335,17 +340,17 @@
      "lojas": 1
     },
     {
+     "loja": "Amazon",
+     "preco": 274.54,
+     "nome": "EA Sports FC 27 - PlayStation 5",
+     "url": "https://www.buscape.com.br/lead?oid=1579158548",
+     "lojas": 1
+    },
+    {
      "loja": "Americanas",
      "preco": 290.99,
      "nome": "Jogo EA Sports FC 27 PS5",
      "url": "https://www.buscape.com.br/lead?oid=1580399313",
-     "lojas": 1
-    },
-    {
-     "loja": "Amazon",
-     "preco": 299.9,
-     "nome": "EA Sports FC 27 - PlayStation 5",
-     "url": "https://www.buscape.com.br/lead?oid=1579158548",
      "lojas": 1
     },
     {
@@ -627,10 +632,15 @@
      "2026-11-25T05:34-03:00",
      260.1,
      "Magazine Luiza"
+    ],
+    [
+     "2026-11-26T00:34-03:00",
+     260.1,
+     "Magazine Luiza"
     ]
    ]
   }
  },
- "atualizado": "2026-11-25T16:15-03:00",
+ "atualizado": "2026-11-26T00:34-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
