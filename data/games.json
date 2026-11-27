@@ -351,9 +351,16 @@
     },
     {
      "loja": "Amazon",
-     "preco": 274.56,
+     "preco": 260.55,
      "nome": "EA Sports FC 27 - PlayStation 5",
      "url": "https://www.buscape.com.br/lead?oid=1579158548",
+     "lojas": 1
+    },
+    {
+     "loja": "Amazon",
+     "preco": 265.9,
+     "nome": "EA Sports FC 27 - PlayStation 4",
+     "url": "https://www.buscape.com.br/lead?oid=1580163711",
      "lojas": 1
     },
     {
@@ -361,13 +368,6 @@
      "preco": 290.99,
      "nome": "Jogo EA Sports FC 27 PS5",
      "url": "https://www.buscape.com.br/lead?oid=1580399313",
-     "lojas": 1
-    },
-    {
-     "loja": "Amazon",
-     "preco": 329.9,
-     "nome": "EA Sports FC 27 - PlayStation 4",
-     "url": "https://www.buscape.com.br/lead?oid=1580163711",
      "lojas": 1
     },
     {
@@ -656,6 +656,6 @@
    ]
   }
  },
- "atualizado": "2026-11-27T09:20-03:00",
+ "atualizado": "2026-11-27T20:27-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
