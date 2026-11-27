@@ -3,8 +3,8 @@
   "gta6": {
    "nome": "GTA 6",
    "alvo": 330,
-   "preco": 395.12,
-   "loja": "Magazine Luiza",
+   "preco": 418.41,
+   "loja": "KaBuM!",
    "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
    "min": 395.12,
    "max": 426.55,
@@ -12,8 +12,8 @@
    "aviso": null,
    "ofertas": [
     {
-     "loja": "Magazine Luiza",
-     "preco": 395.12,
+     "loja": "KaBuM!",
+     "preco": 418.41,
      "nome": "Jogo Grand Theft Auto VI (GTA 6) PS5 Rockstar",
      "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
      "lojas": 4
@@ -323,6 +323,11 @@
      "2026-11-26T22:44-03:00",
      395.12,
      "Magazine Luiza"
+    ],
+    [
+     "2026-11-27T09:20-03:00",
+     418.41,
+     "KaBuM!"
     ]
    ]
   },
@@ -642,10 +647,15 @@
      "2026-11-26T00:34-03:00",
      260.1,
      "Magazine Luiza"
+    ],
+    [
+     "2026-11-27T09:20-03:00",
+     260.1,
+     "Magazine Luiza"
     ]
    ]
   }
  },
- "atualizado": "2026-11-26T22:44-03:00",
+ "atualizado": "2026-11-27T09:20-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
