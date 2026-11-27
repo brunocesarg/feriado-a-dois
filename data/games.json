@@ -3,26 +3,26 @@
   "gta6": {
    "nome": "GTA 6",
    "alvo": 330,
-   "preco": 418.41,
-   "loja": "KaBuM!",
+   "preco": 395.12,
+   "loja": "Magazine Luiza",
    "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
-   "min": 400.41,
+   "min": 395.12,
    "max": 426.55,
    "ultimo_alerta": null,
    "aviso": null,
    "ofertas": [
     {
-     "loja": "KaBuM!",
-     "preco": 418.41,
+     "loja": "Magazine Luiza",
+     "preco": 395.12,
      "nome": "Jogo Grand Theft Auto VI (GTA 6) PS5 Rockstar",
      "url": "https://www.buscape.com.br/jogos-ps5/jogo-grand-theft-auto-vi-gta-6-ps5-rockstar",
      "lojas": 4
     },
     {
-     "loja": "Magazine Luiza",
-     "preco": 455.29,
-     "nome": "Jogo Grand Theft Auto GTA VI, PS5 - TT000272PS5 - Playstation, PS5",
-     "url": "https://www.buscape.com.br/lead?oid=1582917111",
+     "loja": "Fast Shop",
+     "preco": 449,
+     "nome": "Jogo Grand Theft Auto GTA VI, PS5 - TT000272PS5",
+     "url": "https://www.buscape.com.br/lead?oid=1582786605",
      "lojas": 1
     },
     {
@@ -318,6 +318,11 @@
      "2026-11-26T00:34-03:00",
      418.41,
      "KaBuM!"
+    ],
+    [
+     "2026-11-26T22:44-03:00",
+     395.12,
+     "Magazine Luiza"
     ]
    ]
   },
@@ -361,13 +366,6 @@
      "lojas": 1
     },
     {
-     "loja": "Fast Shop",
-     "preco": 338.11,
-     "nome": "Jogo PS5 EA Sports FC 27 Edição Standard - Sony",
-     "url": "https://www.buscape.com.br/lead?oid=1578619476",
-     "lojas": 1
-    },
-    {
      "loja": "Magazine Luiza",
      "preco": 354.24,
      "nome": "Jogo EA Sports FC 27 PlayStation 5 Sony",
@@ -379,6 +377,13 @@
      "preco": 360.96,
      "nome": "Jogo PS5 EA Sports FC 27, ELECTRONIC ARTS",
      "url": "https://www.buscape.com.br/lead?oid=1580470959",
+     "lojas": 1
+    },
+    {
+     "loja": "Fast Shop",
+     "preco": 379.9,
+     "nome": "Jogo PS5 EA Sports FC 27 Edição Standard - Sony",
+     "url": "https://www.buscape.com.br/lead?oid=1578619476",
      "lojas": 1
     }
    ],
@@ -641,6 +646,6 @@
    ]
   }
  },
- "atualizado": "2026-11-26T13:54-03:00",
+ "atualizado": "2026-11-26T22:44-03:00",
  "fonte": "Buscapé (Amazon, Kabum, Magalu, Fast Shop e outras)"
 }
